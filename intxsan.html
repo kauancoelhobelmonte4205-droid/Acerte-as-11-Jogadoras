@@ -7,6 +7,9 @@
     <style>
         :root { --cor-tema: #ef4444; --gramado: #15803d; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        #modal-inicio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--cor-tema); width: 80%; max-width: 400px; }
+        .btn-play { background: var(--cor-tema); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; }
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor-tema); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 90%; max-width: 300px; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         #placar { color: var(--cor-tema); font-weight: bold; font-size: 22px; }
@@ -18,7 +21,6 @@
         .acertou .camisa { background: var(--cor-tema); }
         .acertou .nome-revelado { display: block; }
         .acertou .dica { display: none; }
-        /* 4-3-3 */
         .pos1 { bottom: 10px; left: 135px; } 
         .pos2 { bottom: 80px; left: 20px; } .pos3 { bottom: 70px; left: 95px; } .pos4 { bottom: 70px; left: 175px; } .pos5 { bottom: 80px; left: 255px; }
         .pos6 { bottom: 180px; left: 40px; } .pos7 { bottom: 170px; left: 135px; } .pos8 { bottom: 180px; left: 230px; }
@@ -26,6 +28,14 @@
     </style>
 </head>
 <body>
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2>KICK OFF</h2>
+            <p><b>Internacional 1 x 0 Santos</b></p>
+            <p style="font-size: 13px; color: #aaa; line-height: 1.6;">Brasil Ladies Cup - FINAL<br>10/12/2023<br>Estádio Canindé</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none'; document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
     <div class="painel"><input type="text" id="busca" placeholder="Quem jogou?"><p>Acertos: <span id="placar">0</span>/11</p></div>
     <div class="campo">
         <div class="jogadora pos1" data-nome="Gabi Barbieri"></div>
@@ -52,12 +62,17 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                // Aceita o nome completo ou apenas o sobrenome
-                if ((digitado === correto || (correto.includes(' ') && digitado === correto.split(' ').pop())) && !j.classList.contains('acertou')) {
+                if ((digitado === correto || digitado === correto.split('. ').pop()) && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
                     acertos++;
                     document.getElementById('placar').innerText = acertos;
                     input.value = '';
+                    if(acertos === 11) {
+                        setTimeout(() => { 
+                            alert("Parabéns! Próximo desafio: Derby Paulista!"); 
+                            window.location.href = "corxpal.html"; 
+                        }, 300);
+                    }
                 }
             });
         });
