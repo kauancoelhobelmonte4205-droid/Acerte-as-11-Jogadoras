@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Corinthians</title>
+    <title>Missing 11 - Jogo 2</title>
     <style>
         :root { --cor: #ffffff; --gramado: #15803d; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
@@ -31,23 +31,26 @@
     </style>
 </head>
 <body>
-    <div id="modal-inicio"><div class="kick-off-box"><h2>KICK OFF</h2><p>Libertadores Feminina 2023 - FINAL<br>Palmeiras 0 x 1 Corinthians</p><button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button></div></div>
-    
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2>KICK OFF</h2>
+            <p><b>CONMEBOL Libertadores Feminina - FINAL</b></p>
+            <p style="font-size: 14px; line-height: 1.6;">Palmeiras 0 x 1 Corinthians<br>21/10/2023<br>Estádio Pascual Guerrero</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button>
+        </div>
+    </div>
     <div class="nav-fases">
         <a href="index.html" class="btn-nav">⬅ Jogo Anterior</a>
         <span>Escalação 2</span>
-        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+        <a href="corxpal2.html" class="btn-nav">Próximo ➡</a>
     </div>
-
     <div class="painel"><input type="text" id="busca" placeholder="Digite o nome..." disabled><p>Acertos: <span id="placar">0</span>/11</p></div>
-    
     <div class="campo">
         <div class="jogadora gol" data-nome="Lele"></div><div class="jogadora lat1" data-nome="Katiuscia"></div><div class="jogadora lat2" data-nome="Yasmin"></div>
         <div class="jogadora zag1" data-nome="Tarciane"></div><div class="jogadora zag2" data-nome="Mariza"></div><div class="jogadora meia1" data-nome="Luana"></div>
         <div class="jogadora meia2" data-nome="Gabi Zanotti"></div><div class="jogadora meia3" data-nome="Vic Albuquerque"></div><div class="jogadora ata1" data-nome="Tamires"></div>
         <div class="jogadora ata2" data-nome="Millene"></div><div class="jogadora ata3" data-nome="Gabi Portilho"></div>
     </div>
-
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
@@ -60,11 +63,8 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                
-                // Aceita variações da Yasmin
                 let match = (digitado === correto);
                 if (correto === "yasmin" && (digitado === "yasmim" || digitado === "iasmim" || digitado === "iasmin")) match = true;
-
                 if (match && !j.classList.contains('acertou')) {
                     j.classList.add('acertou'); acertos++; document.getElementById('placar').innerText = acertos; input.value = '';
                 }
