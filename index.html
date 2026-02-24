@@ -6,21 +6,34 @@
     <title>Acerte as 11 Jogadoras</title>
     <style>
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #ef4444; margin-bottom: 30px; }
-        h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; color: #ef4444; }
+        header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #666; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; color: #fff; }
         .container { width: 90%; max-width: 500px; flex: 1; }
         .card { background: #222; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: block; }
+        .card:hover { transform: translateY(-5px); background: #282828; }
         
-        /* Efeito de hover geral */
-        .card:hover { border-color: #ef4444; transform: translateY(-5px); background: #282828; }
-        
-        /* Cor especial para o card da Base */
-        .card-base:hover { border-color: #22c55e !important; }
-        .card-base h2 { color: #22c55e; }
-
         .card h2 { margin: 0 0 8px 0; font-size: 20px; }
         .card p { margin: 0; color: #bbb; font-size: 13px; line-height: 1.4; }
-        
+
+        /* --- Cores Customizadas --- */
+
+        /* Times Brasileiros - Vermelho */
+        .br h2 { color: #ef4444; }
+        .br:hover { border-color: #ef4444; }
+
+        /* Categorias de Base - Verde */
+        .base h2 { color: #22c55e; }
+        .base:hover { border-color: #22c55e; }
+
+        /* Seleções - Amarelo */
+        .selecoes h2 { color: #fde047; }
+        .selecoes:hover { border-color: #fde047; }
+
+        /* Europa - Azul */
+        .europa h2 { color: #3b82f6; }
+        .europa:hover { border-color: #3b82f6; }
+
+        /* Instagram */
         .instagram-btn { margin-top: 15px; display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 14px; transition: 0.3s; }
         .instagram-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4); }
         .footer-info { padding: 25px; font-size: 12px; color: #666; }
@@ -31,24 +44,26 @@
         <h1>Acerte as 11 Jogadoras</h1>
     </header>
     <div class="container">
-        <a href="times_br.html" class="card">
+        <a href="times_br.html" class="card br">
             <h2>🇧🇷 Times Brasileiros</h2>
             <p>Aceite o desafio e tente escalar os elencos mais icônicos do nosso futebol!</p>
         </a>
 
-        <a href="base.html" class="card card-base">
+        <a href="base.html" class="card base">
             <h2>🌱 Categorias de Base</h2>
             <p>Escale as futuras craques em suas partidas mais memoráveis!</p>
         </a>
 
-        <a href="selecoes.html" class="card">
+        <a href="selecoes.html" class="card selecoes">
             <h2>🌎 Seleções Nacionais</h2>
             <p>O orgulho de uma nação! Relembre os esquadrões lendários em grandes competições.</p>
         </a>
-        <a href="euro.html" class="card">
+
+        <a href="euro.html" class="card europa">
             <h2>🇪🇺 Times Europeus</h2>
             <p>Escale os times lendários que dominaram a Europa!</p>
         </a>
+
         <a href="https://www.instagram.com/kauann__sci?igsh=MWUybXJpaHB2bGZ2Yw%3D%3D&utm_source=qr" target="_blank" class="instagram-btn">
             📸 @kauann__sci
         </a>
