@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - Final Brasileirão 2025</title>
+    <style>
+        :root { --preto-corinthians: #000000; --branco: #ffffff; --gramado: #15803d; --amarelo: #fde047; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
+        .kick-off-box { background: #222; padding: 30px; border-radius: 20px; border: 1px solid #333; width: 80%; max-width: 400px; }
+        .btn-play, .btn-proximo { background: var(--branco); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--preto-corinthians); position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        #placar { color: var(--amarelo); font-weight: bold; }
+
+        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
+        .jogadora { position: absolute; width: 80px; text-align: center; }
+        .camisa { width: 40px; height: 40px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid black; }
+        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.4); font-weight: bold; font-size: 12px; }
+        
+        .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; white-space: nowrap; }
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
+        
+        .acertou .camisa { background: #000; border-color: #fff; }
+        .acertou .camisa::after { color: #fff; }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Formação 4-3-3 */
+        .pos1 { bottom: 10px; left: 135px; }
+        .pos5 { bottom: 85px; left: 10px; } .pos99 { bottom: 75px; left: 95px; } .pos20 { bottom: 75px; left: 175px; } .pos37 { bottom: 85px; left: 260px; }
+        .pos30 { bottom: 180px; left: 55px; } .pos31 { bottom: 170px; left: 135px; } .pos27 { bottom: 180px; left: 215px; }
+        .pos9 { top: 120px; left: 15px; } .pos10 { top: 90px; left: 135px; } .pos10b { top: 120px; left: 255px; }
+    </style>
+</head>
+<body>
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--amarelo);">KICK OFF</h2>
+            <p><b>Brasileirão Feminino A-1 - FINAL</b></p>
+            <p style="font-size: 14px; line-height: 1.6;">Corinthians 1 x 0 Cruzeiro<br>14/09/2025 - 10:30<br>Neo Química Arena</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--amarelo);">É CAMPEÃO!</h2>
+            <p>Brabas do Timão! Você escalou o Corinthians campeão brasileiro!</p>
+            <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="times_br.html" class="btn-nav">🏠 Menu Brasil</a>
+        <span>Final Brasileirão 25</span>
+        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o NOME COMPLETO..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="jogadora pos1" data-nome="Nicole" data-num="1"></div>
+        <div class="jogadora pos5" data-nome="Thais Ferreira" data-num="5"></div>
+        <div class="jogadora pos99" data-nome="Erika" data-num="99"></div>
+        <div class="jogadora pos20" data-nome="Mariza" data-num="20"></div>
+        <div class="jogadora pos37" data-nome="Tamires" data-num="37"></div>
+        <div class="jogadora pos10" data-nome="Gabi Zanotti" data-num="30"></div>
+        <div class="jogadora pos31" data-nome="Day Rodriguez" data-num="31"></div>
+        <div class="jogadora pos27" data-nome="Duda Sampaio" data-num="27"></div>
+        <div class="jogadora pos9" data-nome="Andressa Alves" data-num="9"></div>
+        <div class="jogadora pos30" data-nome="Jaqueline" data-num="10"></div>
+        <div class="jogadora pos40" data-nome="Jhonson" data-num="10"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
+        let acertos = 0;
+
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+        });
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    if (acertos === 11) { setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
