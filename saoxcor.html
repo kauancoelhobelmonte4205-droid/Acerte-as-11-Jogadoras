@@ -24,31 +24,37 @@
 
         .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
         .jogadora { position: absolute; width: 80px; text-align: center; }
+        
+        /* Camisa Base */
         .camisa { width: 38px; height: 38px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid var(--spfc-preto); position: relative; }
         
+        /* Listras SPFC */
         .camisa::before { content: ""; position: absolute; top: 40%; width: 100%; height: 3px; background: linear-gradient(to bottom, var(--spfc-vermelho) 50%, var(--spfc-preto) 50%); }
-        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.7); font-weight: bold; font-size: 10px; z-index: 2; }
+        
+        /* NÚMERO ESCONDIDO POR PADRÃO */
+        .camisa::after { content: attr(data-numero); color: transparent; font-weight: bold; font-size: 11px; z-index: 2; transition: 0.3s; }
         
         .dica { font-family: monospace; font-size: 9px; color: #bbb; margin-top: 4px; white-space: nowrap; }
         .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 4px; background: white; color: black; padding: 2px; border-radius: 3px; text-transform: uppercase; }
         
+        /* QUANDO ACERTA: MOSTRA NÚMERO E NOME */
         .acertou .camisa { background: var(--spfc-preto); border-color: var(--spfc-vermelho); }
-        .acertou .camisa::after { color: white; }
+        .acertou .camisa::after { color: white; } /* Número aparece aqui */
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posicionamento 4-1-4-1 (Baseado no print) */
-        .pos12 { bottom: 10px; left: 135px; } /* Carlinha */
-        .pos2 { bottom: 85px; left: 5px; }   /* Bruna calderan */
-        .pos3 { bottom: 75px; left: 90px; }  /* Kaká */
-        .pos4 { bottom: 75px; left: 180px; } /* Day Silva */
-        .pos23 { bottom: 85px; left: 265px; }/* Bia Menezes */
-        .pos95 { bottom: 170px; left: 135px; }/* Robinha */
-        .pos77 { top: 190px; left: 10px; }  /* Isa */
-        .pos7 { top: 180px; left: 95px; }   /* Aline Milene */
-        .pos10 { top: 180px; left: 175px; } /* Camilinha */
-        .pos11 { top: 190px; left: 260px; } /* Dudinha */
-        .pos19 { top: 90px; left: 135px; }  /* Crivelari */
+        /* Posicionamento 4-1-4-1 */
+        .pos12 { bottom: 10px; left: 135px; } 
+        .pos2 { bottom: 85px; left: 5px; }   
+        .pos3 { bottom: 75px; left: 90px; }  
+        .pos4 { bottom: 75px; left: 180px; } 
+        .pos23 { bottom: 85px; left: 265px; }
+        .pos95 { bottom: 170px; left: 135px; }
+        .pos77 { top: 190px; left: 10px; }  
+        .pos7 { top: 180px; left: 95px; }   
+        .pos10 { top: 180px; left: 175px; } 
+        .pos11 { top: 190px; left: 260px; } 
+        .pos19 { top: 90px; left: 135px; }  
     </style>
 </head>
 <body>
@@ -77,7 +83,7 @@
     </div>
 
     <div class="painel">
-        <input type="text" id="busca" placeholder="Digite o nome..." disabled>
+        <input type="text" id="busca" placeholder="Digite o nome da jogadora..." disabled>
         <p>Acertos: <span id="placar">0</span>/11</p>
     </div>
 
@@ -104,6 +110,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
+            // O segredo está no data-numero que o CSS lê
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome}</div>`;
         });
 
