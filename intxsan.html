@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missing 11 - Inter</title>
     <style>
-        :root { --vermelho: #ef4444; --gramado: #15803d; }
+        :root { --vermelho: #ef4444; --branco: #ffffff; --gramado: #15803d; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
         
-        /* MODAIS (INÍCIO E VITÓRIA) */
         #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        #modal-vitoria { display: none; } /* Escondido até vencer */
+        #modal-vitoria { display: none; }
 
         .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--vermelho); width: 80%; max-width: 400px; }
         .btn-play, .btn-proximo { background: var(--vermelho); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-decoration: none; display: inline-block; }
         
         .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
         .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
@@ -24,12 +24,18 @@
 
         .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
         .jogadora { position: absolute; width: 80px; text-align: center; }
-        .camisa { width: 40px; height: 40px; background: #444; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
-        .camisa::after { content: "?"; color: rgba(255,255,255,0.2); font-weight: bold; }
+        
+        /* Camisa Vermelha por padrão */
+        .camisa { width: 40px; height: 40px; background: var(--vermelho); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid white; position: relative; }
+        
+        /* Exibe o "?" enquanto não acerta */
+        .camisa::after { content: "?"; color: var(--branco); font-weight: bold; font-size: 16px; z-index: 2; }
+        
         .dica { font-family: monospace; font-size: 14px; color: #bbb; margin-top: 5px; }
-        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--vermelho); padding: 2px; border-radius: 3px; }
-        .acertou .camisa { background: var(--vermelho); }
-        .acertou .camisa::after { content: ""; }
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--branco); color: var(--vermelho); padding: 2px; border-radius: 3px; }
+        
+        /* Revela o número fornecido por você ao acertar */
+        .acertou .camisa::after { content: attr(data-num); font-size: 13px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
         
@@ -40,6 +46,7 @@
     </style>
 </head>
 <body>
+
     <div id="modal-inicio">
         <div class="kick-off-box">
             <h2>KICK OFF</h2>
@@ -69,17 +76,17 @@
     </div>
 
     <div class="campo">
-        <div class="jogadora gol" data-nome="Gabi Barbieri"></div>
-        <div class="jogadora lat1" data-nome="Tamara"></div>
-        <div class="jogadora lat2" data-nome="Eskerdinha"></div>
-        <div class="jogadora zag1" data-nome="Isa Haas"></div>
-        <div class="jogadora zag2" data-nome="Bruna Benites"></div>
-        <div class="jogadora meia1" data-nome="Capelinha"></div>
-        <div class="jogadora meia2" data-nome="Djeni"></div>
-        <div class="jogadora meia3" data-nome="Leticia Monteiro"></div>
-        <div class="jogadora ata1" data-nome="Soll"></div>
-        <div class="jogadora ata2" data-nome="Belen Aquino"></div>
-        <div class="jogadora ata3" data-nome="Priscila"></div>
+        <div class="jogadora gol" data-nome="Gabi Barbieri" data-num="1"></div>
+        <div class="jogadora lat1" data-nome="Tamara" data-num="18"></div>
+        <div class="jogadora lat2" data-nome="Eskerdinha" data-num="33"></div>
+        <div class="jogadora zag1" data-nome="Isa Haas" data-num="23"></div>
+        <div class="jogadora zag2" data-nome="Bruna Benites" data-num="3"></div>
+        <div class="jogadora meia1" data-nome="Capelinha" data-num="17"></div>
+        <div class="jogadora meia2" data-nome="Djeni" data-num="8"></div>
+        <div class="jogadora meia3" data-nome="Leticia Monteiro" data-num="39"></div>
+        <div class="jogadora ata1" data-nome="Soll" data-num="30"></div>
+        <div class="jogadora ata2" data-nome="Belen Aquino" data-num="11"></div>
+        <div class="jogadora ata3" data-nome="Priscila" data-num="9"></div>
     </div>
 
     <script>
@@ -90,7 +97,7 @@
 
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
-            j.innerHTML = `<div class="camisa"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+            j.innerHTML = `<div class="camisa" data-num="${j.getAttribute('data-num')}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
         input.addEventListener('input', () => {
@@ -102,12 +109,8 @@
                     acertos++; 
                     document.getElementById('placar').innerText = acertos; 
                     input.value = '';
-                    
-                    // MOSTRAR MENSAGEM DE VITÓRIA COM BOTÃO
                     if (acertos === 11) {
-                        setTimeout(() => {
-                            modalVitoria.style.display = 'flex';
-                        }, 500);
+                        setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500);
                     }
                 }
             });
