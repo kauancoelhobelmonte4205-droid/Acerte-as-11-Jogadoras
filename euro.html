@@ -9,23 +9,33 @@
         header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #3b82f6; margin-bottom: 30px; }
         h1 { margin: 0; font-size: 22px; text-transform: uppercase; color: #3b82f6; }
         .container { width: 90%; max-width: 500px; flex: 1; }
-        .card-jogo { background: #222; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; }
+        .card-jogo { background: #222; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; text-align: left; }
         .card-jogo:hover { border-color: #3b82f6; transform: scale(1.02); background: #282828; }
         .info-jogo h3 { margin: 0; font-size: 18px; }
         .info-jogo p { margin: 5px 0 0 0; color: #bbb; font-size: 12px; }
-        .btn-jogar { background: #3b82f6; color: white; padding: 8px 15px; border-radius: 5px; font-weight: bold; font-size: 12px; }
+        .btn-jogar { background: #3b82f6; color: white; padding: 8px 15px; border-radius: 5px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
         .btn-voltar { margin-top: 20px; color: #3b82f6; text-decoration: none; font-size: 14px; font-weight: bold; }
     </style>
 </head>
 <body>
     <header><h1>🇪🇺 Times Europeus</h1></header>
     <div class="container">
+        
+        <a href="arsxbar.html" class="card-jogo">
+            <div class="info-jogo">
+                <h3>Arsenal x Barcelona</h3>
+                <p>UEFA Women’s Champions League • Final</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
         <div class="card-jogo" style="opacity: 0.5;">
             <div class="info-jogo">
                 <h3>Em breve...</h3>
                 <p>Champions League e Ligas Europeias.</p>
             </div>
         </div>
+
         <a href="index.html" class="btn-voltar">← Voltar ao Menu Principal</a>
     </div>
 </body>
