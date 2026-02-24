@@ -3,92 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Gurias Coloradas</title>
+    <title>Missing 11</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            background-color: #1a1a1a;
-            color: white;
-        }
-
-        h1 { margin: 15px 0; color: #f87171; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-
-        .search-container { margin-bottom: 20px; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
+        .painel { background: #333; padding: 15px; border-bottom: 3px solid #ef4444; }
+        input { padding: 10px; width: 80%; border-radius: 20px; border: none; outline: none; text-align: center; font-size: 16px; }
+        .campo { position: relative; width: 340px; height: 500px; margin: 20px auto; background: #15803d; border: 3px solid white; border-radius: 10px; }
+        .jogadora { position: absolute; width: 70px; text-align: center; }
+        .camisa { width: 35px; height: 35px; background: #555; margin: 0 auto; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
+        .nome { font-size: 11px; background: rgba(0,0,0,0.8); margin-top: 5px; display: none; padding: 2px; border-radius: 3px; }
         
-        input {
-            padding: 12px;
-            width: 280px;
-            border-radius: 25px;
-            border: 2px solid #ef4444;
-            font-size: 16px;
-            outline: none;
-        }
+        .acertou .camisa { background: #ef4444; }
+        .acertou .nome { display: block; background: #ef4444; }
+        
+        /* Posições ajustadas pra tela menor */
+        .gol { bottom: 10px; left: 135px; }
+        .zag1 { bottom: 80px; left: 60px; }
+        .zag2 { bottom: 80px; left: 210px; }
+        .lat1 { bottom: 130px; left: 5px; }
+        .lat2 { bottom: 130px; left: 265px; }
+        .meia1 { bottom: 230px; left: 30px; }
+        .meia2 { bottom: 260px; left: 135px; }
+        .meia3 { bottom: 230px; left: 240px; }
+        .ata1 { top: 60px; left: 30px; }
+        .ata2 { top: 20px; left: 135px; }
+        .ata3 { top: 60px; left: 240px; }
+    </style>
+</head>
+<body>
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o nome da jogadora...">
+        <p style="margin: 10px 0 0 0;">Acertos: <span id="placar">0</span>/11</p>
+    </div>
+    <div class="campo">
+        <div class="jogadora gol" data-nome="gabi barbieri"><div class="camisa"></div><div class="nome">G. Barbieri</div></div>
+        <div class="jogadora lat1" data-nome="tamara"><div class="camisa"></div><div class="nome">Tamara</div></div>
+        <div class="jogadora lat2" data-nome="eskerdinha"><div class="camisa"></div><div class="nome">Eskerdinha</div></div>
+        <div class="jogadora zag1" data-nome="isa haas"><div class="camisa"></div><div class="nome">Isa Haas</div></div>
+        <div class="jogadora zag2" data-nome="bruna benites"><div class="camisa"></div><div class="nome">B. Benites</div></div>
+        <div class="jogadora meia1" data-nome="capelinha"><div class="camisa"></div><div class="nome">Capelinha</div></div>
+        <div class="jogadora meia2" data-nome="djeni"><div class="camisa"></div><div class="nome">Djeni</div></div>
+        <div class="jogadora meia3" data-nome="leticia monteiro"><div class="camisa"></div><div class="nome">L. Monteiro</div></div>
+        <div class="jogadora ata1" data-nome="soll"><div class="camisa"></div><div class="nome">Soll</div></div>
+        <div class="jogadora ata2" data-nome="belen aquino"><div class="camisa"></div><div class="nome">B. Aquino</div></div>
+        <div class="jogadora ata3" data-nome="priscila"><div class="camisa"></div><div class="nome">Priscila</div></div>
+    </div>
 
-        /* O Campo de Jogo */
-        .campo {
-            position: relative;
-            width: 100%;
-            max-width: 420px;
-            height: 620px;
-            margin: auto;
-            background: #15803d;
-            border: 5px solid white;
-            border-radius: 15px;
-            /* Gramado */
-            background-image: repeating-linear-gradient(#15803d, #15803d 40px, #166534 40px, #166534 80px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    <script>
+        const input = document.getElementById('busca');
+        const jogadoras = document.querySelectorAll('.jogadora');
+        const placar = document.getElementById('placar');
+        let cont = 0;
 
-        /* Container da Jogadora */
-        .jogadora {
-            position: absolute;
-            width: 70px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.4s ease;
-        }
-
-        /* Estilo da Camisa */
-        .camisa-img {
-            width: 50px;
-            height: auto;
-            filter: brightness(0) invert(1) opacity(0.3); /* Fica branca/apagada antes de acertar */
-            transition: filter 0.5s ease;
-        }
-
-        /* Estilo do Nome */
-        .nome-display {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 10px;
-            margin-top: 5px;
-            min-width: 60px;
-            height: 14px;
-            visibility: hidden; /* Esconde o nome até acertar */
-        }
-
-        /* Quando acertar (Classe ativada pelo JS) */
-        .jogadora.revelada .camisa-img {
-            filter: brightness(1) opacity(1); /* Mostra a cor real da camisa */
-        }
-
-        .jogadora.revelada .nome-display {
-            visibility: visible; /* Mostra o nome */
-            background: #ef4444; /* Fundo vermelho do Inter */
-        }
-
-        /* POSICIONAMENTO (4-3-3) */
-        .gol { top: 530px; left: 175px; }
-        .lat1 { top: 430px; left: 20px; }
-        .lat2 { top: 430px; left: 330px; }
-        .zag1 { top: 460px; left: 100px; }
-        .zag2 { top: 460px; left: 250px; }
-        .meia1 { top: 310px; left: 50px; }
-        .meia2 { top: 290px; left: 175px; }
-        .meia3 { top: 310px; left: 300px; }
-        .ata1 { top: 150px; left: 50px; }
-        .ata2 { top: 110px; left: 175px; }
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            
+            jogadoras.forEach(j => {
+                if (j.getAttribute('data-nome') === digitado && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    cont++;
+                    placar.innerText = cont;
+                    input.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
