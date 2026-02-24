@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias de Base - Menu</title>
+    <style>
+        :root { 
+            --verde-base: #22c55e; 
+            --fundo: #121212; 
+            --card: #1e1e1e; 
+            --branco: #ffffff;
+        }
+        
+        body { 
+            background-color: var(--fundo); 
+            color: white; 
+            font-family: sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        
+        header { 
+            background: #000; 
+            width: 100%; 
+            padding: 20px 0; 
+            border-bottom: 2px solid var(--verde-base); 
+            margin-bottom: 20px; 
+            text-align: center;
+        }
+
+        h1 { 
+            margin: 0; 
+            font-size: 20px; 
+            color: var(--verde-base); 
+            text-transform: uppercase;
+        }
+        
+        .container { 
+            width: 90%; 
+            max-width: 400px; 
+        }
+        
+        .card { 
+            background: var(--card); 
+            border-radius: 15px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            border: 1px solid #333; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .card:active { transform: scale(0.98); }
+
+        .card-info h2 { margin: 0; font-size: 18px; }
+        .card-info p { margin: 5px 0 0 0; color: #888; font-size: 13px; }
+
+        .btn-jogar { 
+            background: var(--branco); 
+            color: black; 
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 12px; 
+            text-transform: uppercase;
+        }
+
+        .nav-voltar { 
+            margin-top: 20px; 
+            color: var(--verde-base); 
+            text-decoration: none; 
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌱 CATEGORIAS DE BASE</h1>
+    </header>
+
+    <div class="container">
+        
+        <a href="intxgre_sub17.html" class="card">
+            <div class="card-info">
+                <h2>Inter x Grêmio</h2>
+                <p>Brasileirão Sub-17 2024</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
+        <div style="border: 1px dashed #444; padding: 20px; border-radius: 15px; text-align: center; color: #666; font-size: 13px;">
+            Novas partidas históricas em breve...
+        </div>
+
+        <a href="index.html" class="nav-voltar">← Voltar ao Menu Principal</a>
+
+    </div>
+
+</body>
+</html>
