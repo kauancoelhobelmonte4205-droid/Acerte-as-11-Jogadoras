@@ -10,9 +10,17 @@
         h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; color: #ef4444; }
         .container { width: 90%; max-width: 500px; flex: 1; }
         .card { background: #222; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: block; }
+        
+        /* Efeito de hover geral */
         .card:hover { border-color: #ef4444; transform: translateY(-5px); background: #282828; }
+        
+        /* Cor especial para o card da Base */
+        .card-base:hover { border-color: #22c55e !important; }
+        .card-base h2 { color: #22c55e; }
+
         .card h2 { margin: 0 0 8px 0; font-size: 20px; }
         .card p { margin: 0; color: #bbb; font-size: 13px; line-height: 1.4; }
+        
         .instagram-btn { margin-top: 15px; display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 14px; transition: 0.3s; }
         .instagram-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4); }
         .footer-info { padding: 25px; font-size: 12px; color: #666; }
@@ -27,6 +35,12 @@
             <h2>🇧🇷 Times Brasileiros</h2>
             <p>Aceite o desafio e tente escalar os elencos mais icônicos do nosso futebol!</p>
         </a>
+
+        <a href="base.html" class="card card-base">
+            <h2>🌱 Categorias de Base</h2>
+            <p>Escale as futuras craques em suas partidas mais memoráveis!</p>
+        </a>
+
         <a href="selecoes.html" class="card">
             <h2>🌎 Seleções Nacionais</h2>
             <p>O orgulho de uma nação! Relembre os esquadrões lendários em grandes competições.</p>
