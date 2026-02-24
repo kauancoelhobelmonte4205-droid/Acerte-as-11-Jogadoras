@@ -25,19 +25,20 @@
         .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
         .jogadora { position: absolute; width: 80px; text-align: center; }
         
-        /* Camisa permanece branca */
+        /* Camisa */
         .camisa { width: 38px; height: 38px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid var(--spfc-preto); position: relative; }
         
         .camisa::before { content: ""; position: absolute; top: 40%; width: 100%; height: 3px; background: linear-gradient(to bottom, var(--spfc-vermelho) 50%, var(--spfc-preto) 50%); }
         
-        /* Número oculto (cor transparente) */
-        .camisa::after { content: attr(data-numero); color: transparent; font-weight: bold; font-size: 11px; z-index: 2; transition: 0.2s; }
+        /* O "?" aparece aqui por padrão */
+        .camisa::after { content: "?"; color: var(--spfc-preto); font-weight: bold; font-size: 16px; transition: 0.2s; z-index: 2; }
         
+        /* Dica de asteriscos */
         .dica { font-family: monospace; font-size: 9px; color: #bbb; margin-top: 4px; white-space: nowrap; }
         .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 4px; background: white; color: black; padding: 2px; border-radius: 3px; text-transform: uppercase; }
         
-        /* ESTADO DE ACERTO: Apenas revela o número e o nome */
-        .acertou .camisa::after { color: var(--spfc-preto); } /* Número fica visível em preto */
+        /* Estado de acerto: o "?" vira o número */
+        .acertou .camisa::after { content: attr(data-numero); font-size: 11px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
@@ -56,6 +57,7 @@
     </style>
 </head>
 <body>
+
     <div id="modal-inicio">
         <div class="kick-off-box">
             <h2 style="color: var(--spfc-vermelho);">SÃO PAULO x CORINTHIANS</h2>
@@ -107,6 +109,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
+            // Mantém asteriscos embaixo
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome}</div>`;
         });
 
