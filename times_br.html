@@ -1,3 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times Brasileiros - Menu</title>
+    <style>
+        :root { 
+            --vermelho: #e11d48; /* Tom de vermelho vibrante */
+            --fundo: #121212; 
+            --card: #1e1e1e; 
+            --branco: #ffffff;
+        }
+        
+        body { 
+            background-color: var(--fundo); 
+            color: white; 
+            font-family: sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        
+        header { 
+            background: #000; 
+            width: 100%; 
+            padding: 20px 0; 
+            border-bottom: 2px solid var(--vermelho); 
+            margin-bottom: 20px; 
+            text-align: center;
+        }
+
+        h1 { 
+            margin: 0; 
+            font-size: 20px; 
+            color: var(--vermelho); 
+            text-transform: uppercase;
+        }
+        
+        .container { 
+            width: 90%; 
+            max-width: 400px; 
+        }
+        
+        .card { 
+            background: var(--card); 
+            border-radius: 15px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            border: 1px solid #333; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            text-decoration: none;
+            color: white;
+        }
+
+        .card-info h2 { margin: 0; font-size: 18px; }
+        .card-info p { margin: 5px 0 0 0; color: #888; font-size: 13px; }
+
+        /* BOTÃO DE JOGAR BRANCO */
+        .btn-jogar { 
+            background: var(--branco); 
+            color: black; 
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 12px; 
+            text-transform: uppercase;
+        }
+
+        .nav-voltar { 
+            margin-top: 20px; 
+            color: var(--vermelho); 
+            text-decoration: none; 
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🇧🇷 TIMES BRASILEIROS</h1>
+    </header>
+
     <div class="container">
         
         <a href="corxcru.html" class="card">
@@ -43,3 +130,6 @@
         <a href="index.html" class="nav-voltar">← Voltar ao Menu</a>
 
     </div>
+
+</body>
+</html>
