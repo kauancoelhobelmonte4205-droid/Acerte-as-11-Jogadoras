@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brasil x EUA 2007 - Acerte as 11</title>
     <style>
-        :root { --cor-tema: #fde047; --gramado: #15803d; --azul: #2563eb; }
+        :root { --cor-tema: #fde047; --gramado: #15803d; --azul: #2563eb; --verde-br: #22c55e; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
         
-        #modal-inicio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        /* MODAIS */
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
         .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--cor-tema); width: 80%; max-width: 400px; }
-        .btn-play { background: var(--cor-tema); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-transform: uppercase; }
+        .btn-play, .btn-proximo { background: var(--cor-tema); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-transform: uppercase; text-decoration: none; display: inline-block; }
 
         .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; width: 100%; box-sizing: border-box; }
         .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; }
@@ -18,24 +21,23 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor-tema); position: sticky; top: 0; z-index: 10; width: 100%; box-sizing: border-box; }
         input { padding: 12px; width: 90%; max-width: 300px; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR COLORIDO */
         .placar-texto { margin: 10px 0 0 0; font-size: 14px; color: #bbb; }
         #placar { color: var(--cor-tema); font-weight: bold; font-size: 20px; }
 
         .campo { position: relative; width: 350px; height: 520px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
         .jogadora { position: absolute; width: 80px; text-align: center; }
         .camisa { width: 40px; height: 40px; background: #fbbf24; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid #000; }
-        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.2); font-weight: bold; }
+        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.4); font-weight: bold; }
         
         .dica { font-family: monospace; font-size: 13px; color: #bbb; margin-top: 5px; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--cor-tema); color: #000; padding: 2px; border-radius: 3px; }
 
-        .acertou .camisa { background: var(--cor-tema); border: 2px solid #059669; }
-        .acertou .camisa::after { color: black; }
+        .acertou .camisa { background: var(--cor-tema); border: 2px solid var(--verde-br); }
+        .acertou .camisa::after { color: black; opacity: 1; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posições 3-5-2 Imagem TV */
+        /* Posições */
         .pos1 { bottom: 15px; left: 135px; }
         .pos4 { bottom: 90px; left: 35px; } .pos5 { bottom: 85px; left: 135px; } .pos3 { bottom: 90px; left: 235px; }
         .pos9 { bottom: 200px; left: 10px; } .pos7 { bottom: 190px; left: 135px; } .pos2 { bottom: 200px; left: 260px; }
@@ -48,7 +50,16 @@
         <div class="kick-off-box">
             <h2>KICK OFF</h2>
             <p><b>Brasil 4 x 0 EUA</b></p>
-            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">JOGAR</button>
+            <p style="font-size: 14px; line-height: 1.6;">Copa do Mundo Feminina 2007<br>Semifinal Histórica</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--verde-br);">VITÓRIA HISTÓRICA!</h2>
+            <p>Você escalou a seleção que encantou o mundo em 2007!</p>
+            <a href="selecoes.html" class="btn-proximo">PRÓXIMO DESAFIO</a>
         </div>
     </div>
 
@@ -80,6 +91,7 @@
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
         let acertos = 0;
 
         lista.forEach(j => {
@@ -92,11 +104,18 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
                 if (digitado === correto && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
                     acertos++;
                     document.getElementById('placar').innerText = acertos;
                     input.value = '';
+
+                    if (acertos === 11) {
+                        setTimeout(() => {
+                            modalVitoria.style.display = 'flex';
+                        }, 500);
+                    }
                 }
             });
         });
