@@ -24,8 +24,6 @@
         .acertou .camisa::after { content: ""; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
-
-        /* Posições 4-4-2 ajustadas */
         .gol { bottom: 10px; left: 135px; }
         .lat1 { bottom: 85px; left: 5px; } .zag1 { bottom: 80px; left: 85px; } .zag2 { bottom: 80px; left: 185px; } .lat2 { bottom: 85px; left: 265px; }
         .meia1 { bottom: 190px; left: 20px; } .meia2 { bottom: 180px; left: 100px; } .meia3 { bottom: 180px; left: 180px; } .meia4 { bottom: 190px; left: 260px; }
@@ -37,37 +35,22 @@
         <div class="kick-off-box">
             <h2>KICK OFF</h2>
             <p><b>Paulistão Feminino - SEMIFINAL</b></p>
-            <p style="font-size: 14px; line-height: 1.6;">
-                Corinthians 8 x 0 Palmeiras<br>
-                12/11/2023 - 11:00<br>
-                Neo Química Arena
-            </p>
+            <p style="font-size: 14px; line-height: 1.6;">Corinthians 8 x 0 Palmeiras<br>12/11/2023 - 11:00<br>Neo Química Arena</p>
             <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button>
         </div>
     </div>
-    
     <div class="nav-fases">
         <a href="corxpal.html" class="btn-nav">⬅ Jogo Anterior</a>
         <span>Escalação 3</span>
         <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
     </div>
-
     <div class="painel"><input type="text" id="busca" placeholder="Digite o nome..." disabled><p>Acertos: <span id="placar">0</span>/11</p></div>
-    
     <div class="campo">
-        <div class="jogadora gol" data-nome="Lele"></div>
-        <div class="jogadora lat1" data-nome="Katiuscia"></div>
-        <div class="jogadora zag1" data-nome="Tarciane"></div>
-        <div class="jogadora zag2" data-nome="Mariza"></div>
-        <div class="jogadora lat2" data-nome="Tamires"></div>
-        <div class="jogadora meia1" data-nome="Luana"></div>
-        <div class="jogadora meia2" data-nome="Duda Sampaio"></div>
-        <div class="jogadora meia3" data-nome="Vic Albuquerque"></div>
-        <div class="jogadora meia4" data-nome="Gabi Zanotti"></div>
-        <div class="jogadora ata1" data-nome="Gabi Portilho"></div>
-        <div class="jogadora ata2" data-nome="Millene"></div>
+        <div class="jogadora gol" data-nome="Lele"></div><div class="jogadora lat1" data-nome="Katiuscia"></div><div class="jogadora zag1" data-nome="Tarciane"></div>
+        <div class="jogadora zag2" data-nome="Mariza"></div><div class="jogadora lat2" data-nome="Tamires"></div><div class="jogadora meia1" data-nome="Luana"></div>
+        <div class="jogadora meia2" data-nome="Duda Sampaio"></div><div class="jogadora meia3" data-nome="Vic Albuquerque"></div><div class="jogadora meia4" data-nome="Gabi Zanotti"></div>
+        <div class="jogadora ata1" data-nome="Gabi Portilho"></div><div class="jogadora ata2" data-nome="Millene"></div>
     </div>
-
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
