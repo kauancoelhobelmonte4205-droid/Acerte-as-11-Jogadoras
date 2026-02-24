@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Acerte as 11</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b6623;
+  color:white;
+  text-align:center;
+}
+
+button{
+  padding:10px 20px;
+  margin:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#menu, #game{
+  padding:20px;
+}
+
+.player{
+  margin:10px;
+}
+
+input{
+  padding:6px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="menu">
+  <h1>Acerte as 11</h1>
+  <button onclick="loadGame(0)">Final Brasil Ladies Cup 2023</button>
+</div>
+
+<div id="game" style="display:none;">
+  <h2 id="gameTitle"></h2>
+  <p id="gameInfo"></p>
+  <p>Acertos: <span id="score">0</span>/11</p>
+  <div id="players"></div>
+  <button onclick="backToMenu()">Trocar Escalação</button>
+</div>
+
+<script>
+
+const jogos = [
+  {
+    titulo: "FINAL Brasil Ladies Cup 2023",
+    info: "Internacional 1 x 0 Santos | 10/12/2023 - 16:00 | Estádio do Canindé",
+    jogadores: [
+      {posicao:"Goleira", nome:"Gabi Barbieri"},
+      {posicao:"Lateral Direita", nome:"Tamara"},
+      {posicao:"Lateral Esquerda", nome:"Eskerdinha"},
+      {posicao:"Zagueira", nome:"Isa Haas"},
+      {posicao:"Zagueira", nome:"Bruna Benites"},
+      {posicao:"Meia", nome:"Capelinha"},
+      {posicao:"Meia", nome:"Djeni"},
+      {posicao:"Meia", nome:"Letícia Monteiro"},
+      {posicao:"Atacante", nome:"Soll"},
+      {posicao:"Atacante", nome:"Belén Aquino"},
+      {posicao:"Atacante", nome:"Priscila"}
+    ]
+  }
+];
+
+let jogoAtual = 0;
+let acertos = 0;
+
+function loadGame(index){
+  jogoAtual = index;
+  acertos = 0;
+  document.getElementById("score").innerText = acertos;
+  document.getElementById("menu").style.display="none";
+  document.getElementById("game").style.display="block";
+  document.getElementById("gameTitle").innerText = jogos[index].titulo;
+  document.getElementById("gameInfo").innerText = jogos[index].info;
+  renderPlayers();
+}
+
+function renderPlayers(){
+  const container = document.getElementById("players");
+  container.innerHTML="";
+  jogos[jogoAtual].jogadores.forEach((jogadora,i)=>{
+    const div = document.createElement("div");
+    div.className="player";
+    div.innerHTML = `
+      <p>${jogadora.posicao} (${jogadora.nome.length} letras)</p>
+      <input type="text" onkeyup="check(this,'${jogadora.nome}')">
+    `;
+    container.appendChild(div);
+  });
+}
+
+function check(input,nome){
+  if(input.value.trim().toLowerCase()===nome.toLowerCase() && !input.disabled){
+    input.style.background="lightgreen";
+    input.disabled=true;
+    acertos++;
+    document.getElementById("score").innerText = acertos;
+    if(acertos===11){
+      alert("Parabéns! Você completou a escalação!");
+    }
+  }
+}
+
+function backToMenu(){
+  document.getElementById("game").style.display="none";
+  document.getElementById("menu").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
