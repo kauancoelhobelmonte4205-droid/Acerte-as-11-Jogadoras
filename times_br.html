@@ -1,64 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Times Brasileiros - Menu</title>
-    <style>
-        :root { --amarelo: #fde047; --branco: #ffffff; }
-        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        
-        header { background: #000; width: 100%; padding: 25px 0; border-bottom: 2px solid var(--amarelo); margin-bottom: 30px; }
-        h1 { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; color: var(--amarelo); display: flex; align-items: center; justify-content: center; gap: 10px; }
-        
-        .container { width: 95%; max-width: 500px; flex: 1; }
-        
-        .card { 
-            background: #222; 
-            border-radius: 20px; 
-            padding: 20px; 
-            margin-bottom: 15px; 
-            border: 1px solid #333; 
-            text-decoration: none; 
-            color: white; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            text-align: left;
-        }
-
-        .card-info { flex: 1; padding-right: 10px; }
-        .card-info h2 { margin: 0; font-size: 18px; font-weight: bold; }
-        .card-info p { margin: 5px 0 0 0; color: #bbb; font-size: 13px; }
-
-        /* BOTÃO JOGAR BRANCO */
-        .btn-jogar { 
-            background: var(--branco); 
-            color: black; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 14px; 
-            text-transform: uppercase;
-        }
-
-        .nav-voltar { 
-            margin-top: 20px; 
-            display: inline-block; 
-            color: var(--amarelo); 
-            text-decoration: none; 
-            font-size: 16px; 
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>🇧🇷 TIMES BRASILEIROS</h1>
-    </header>
-
     <div class="container">
         
+        <a href="corxcru.html" class="card">
+            <div class="card-info">
+                <h2>Corinthians x Cruzeiro</h2>
+                <p>Brasileirão 2025</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
         <a href="ferxpal.html" class="card">
             <div class="card-info">
                 <h2>Ferroviária x Palmeiras</h2>
@@ -94,5 +43,3 @@
         <a href="index.html" class="nav-voltar">← Voltar ao Menu</a>
 
     </div>
-</body>
-</html>
