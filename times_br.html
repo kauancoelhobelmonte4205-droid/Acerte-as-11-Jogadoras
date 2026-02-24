@@ -6,7 +6,7 @@
     <title>Times Brasileiros - Menu</title>
     <style>
         :root { 
-            --vermelho: #e11d48; /* Tom de vermelho vibrante */
+            --vermelho: #e11d48; 
             --fundo: #121212; 
             --card: #1e1e1e; 
             --branco: #ffffff;
@@ -42,6 +42,7 @@
         .container { 
             width: 90%; 
             max-width: 400px; 
+            padding-bottom: 40px;
         }
         
         .card { 
@@ -55,12 +56,14 @@
             align-items: center; 
             text-decoration: none;
             color: white;
+            transition: 0.2s;
         }
 
-        .card-info h2 { margin: 0; font-size: 18px; }
-        .card-info p { margin: 5px 0 0 0; color: #888; font-size: 13px; }
+        .card:hover { border-color: var(--vermelho); transform: scale(1.02); }
 
-        /* BOTÃO DE JOGAR BRANCO */
+        .card-info h2 { margin: 0; font-size: 17px; }
+        .card-info p { margin: 5px 0 0 0; color: #888; font-size: 12px; }
+
         .btn-jogar { 
             background: var(--branco); 
             color: black; 
@@ -72,10 +75,12 @@
         }
 
         .nav-voltar { 
-            margin-top: 20px; 
+            margin-top: 10px; 
             color: var(--vermelho); 
             text-decoration: none; 
             font-size: 14px;
+            display: block;
+            text-align: center;
         }
     </style>
 </head>
@@ -87,6 +92,14 @@
 
     <div class="container">
         
+        <a href="saoxcor.html" class="card">
+            <div class="card-info">
+                <h2>São Paulo x Corinthians</h2>
+                <p>Final Supercopa 2025</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
         <a href="corxcru.html" class="card">
             <div class="card-info">
                 <h2>Corinthians x Cruzeiro</h2>
