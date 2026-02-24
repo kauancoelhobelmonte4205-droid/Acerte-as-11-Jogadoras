@@ -3,160 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Final Ladies Cup</title>
+    <title>Missing 11 - Gurias Coloradas</title>
     <style>
-        body { background: #1a1a1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; margin: 0; }
+        .info-partida { background: #000; padding: 10px; font-size: 12px; border-bottom: 2px solid #ef4444; }
+        .painel { background: #222; padding: 15px; position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 80%; border-radius: 20px; border: none; font-size: 16px; outline: none; }
         
-        /* Cabeçalho com Infos da Final */
-        .info-partida { background: #000; padding: 12px; font-size: 13px; border-bottom: 2px solid #ef4444; line-height: 1.4; }
-        .info-partida b { color: #ef4444; font-size: 15px; display: block; margin-bottom: 2px; }
-
-        .painel { background: #222; padding: 15px; border-bottom: 3px solid #ef4444; position: sticky; top: 0; z-index: 100; }
-        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; outline: none; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: #15803d; border: 3px solid white; border-radius: 10px; overflow: hidden; }
         
-        .campo { position: relative; width: 350px; height: 530px; margin: 20px auto; background: #15803d; border: 4px solid white; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background-image: linear-gradient(rgba(255,255,255,0.05) 50%, transparent 50%); background-size: 100% 70px; }
+        .jogadora { position: absolute; width: 80px; text-align: center; }
+        .camisa { width: 40px; height: 40px; background: #444; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
+        .camisa::after { content: "?"; color: rgba(255,255,255,0.2); font-weight: bold; }
         
-        .jogadora { position: absolute; width: 85px; display: flex; flex-direction: column; align-items: center; }
-        
-        /* Camisa com o "?" */
-        .camisa-container { 
-            width: 42px; height: 42px; background: #444; position: relative;
-            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%);
-            display: flex; align-items: center; justify-content: center; transition: 0.3s;
-        }
-        .camisa-container::after { content: "?"; font-size: 18px; font-weight: bold; color: rgba(255,255,255,0.2); }
+        .dica { font-family: monospace; font-size: 14px; color: #aaa; margin-top: 5px; display: block; }
+        .nome-revelado { font-size: 11px; font-weight: bold; background: #ef4444; display: none; margin-top: 5px; padding: 2px; }
 
-        .dica-letras { font-family: 'Courier New', monospace; font-size: 11px; margin-top: 5px; letter-spacing: 1px; color: #bbb; font-weight: bold; }
-        .nome-real { font-size: 11px; font-weight: bold; display: none; margin-top: 5px; padding: 3px 6px; border-radius: 4px; text-transform: uppercase; }
+        /* Estilo Acerto */
+        .acertou .camisa { background: #ef4444; }
+        .acertou .camisa::after { content: ""; }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
 
-        /* Estilo ACERTO */
-        .acertou .camisa-container { background: #ef4444; transform: scale(1.15); box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
-        .acertou .camisa-container::after { content: ""; }
-        .acertou .dica-letras { display: none; }
-        .acertou .nome-real { display: block; background: #ef4444; color: white; }
-
-        /* Posições (Escalação da Final) */
-        .gol { bottom: 15px; left: 132px; }
-        .zag1 { bottom: 95px; left: 60px; }
-        .zag2 { bottom: 95px; left: 205px; }
-        .lat1 { bottom: 145px; left: 5px; }
-        .lat2 { bottom: 145px; left: 260px; }
-        .meia1 { bottom: 245px; left: 30px; }
-        .meia2 { bottom: 275px; left: 132px; }
-        .meia3 { bottom: 245px; left: 235px; }
-        .ata1 { top: 75px; left: 30px; }
-        .ata2 { top: 35px; left: 132px; }
-        .ata3 { top: 75px; left: 235px; }
+        /* Posições */
+        .gol { bottom: 10px; left: 135px; }
+        .zag1 { bottom: 80px; left: 60px; }
+        .zag2 { bottom: 80px; left: 210px; }
+        .lat1 { bottom: 130px; left: 5px; }
+        .lat2 { bottom: 130px; left: 265px; }
+        .meia1 { bottom: 220px; left: 30px; }
+        .meia2 { bottom: 250px; left: 135px; }
+        .meia3 { bottom: 220px; left: 240px; }
+        .ata1 { top: 60px; left: 30px; }
+        .ata2 { top: 20px; left: 135px; }
+        .ata3 { top: 60px; left: 240px; }
     </style>
 </head>
 <body>
 
     <div class="info-partida">
-        <b>BRASIL LADIES CUP 2023 - FINAL</b>
-        Internacional x Santos <br>
-        10/12/2023 - 16:00 | Estádio do Canindé
+        <b>BRASIL LADIES CUP 2023 - FINAL</b><br>
+        Inter x Santos | 10/12/2023 | Canindé
     </div>
 
     <div class="painel">
-        <input type="text" id="busca" placeholder="Chute o nome da atleta..." autocomplete="off">
-        <p style="margin: 10px 0 0 0; font-weight: bold;">Acertos: <span id="placar" style="color: #ef4444;">0</span>/11</p>
+        <input type="text" id="busca" placeholder="Chute o nome...">
+        <p>Acertos: <span id="placar">0</span>/11</p>
     </div>
 
     <div class="campo">
-        <div class="jogadora gol" data-nome="gabi barbieri">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">**** ********</div>
-            <div class="nome-real">Gabi Barbieri</div>
-        </div>
-
-        <div class="jogadora lat1" data-nome="tamara">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">******</div>
-            <div class="nome-real">Tamara</div>
-        </div>
-
-        <div class="jogadora lat2" data-nome="eskerdinha">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">**********</div>
-            <div class="nome-real">Eskerdinha</div>
-        </div>
-
-        <div class="jogadora zag1" data-nome="isa haas">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">*** ****</div>
-            <div class="nome-real">Isa Haas</div>
-        </div>
-
-        <div class="jogadora zag2" data-nome="bruna benites">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">***** *******</div>
-            <div class="nome-real">Bruna Benites</div>
-        </div>
-
-        <div class="jogadora meia1" data-nome="capelinha">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">*********</div>
-            <div class="nome-real">Capelinha</div>
-        </div>
-
-        <div class="jogadora meia2" data-nome="djeni">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">*****</div>
-            <div class="nome-real">Djeni</div>
-        </div>
-
-        <div class="jogadora meia3" data-nome="leticia monteiro">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">******* ********</div>
-            <div class="nome-real">L. Monteiro</div>
-        </div>
-
-        <div class="jogadora ata1" data-nome="soll">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">****</div>
-            <div class="nome-real">Soll</div>
-        </div>
-
-        <div class="jogadora ata2" data-nome="belen aquino">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">***** ******</div>
-            <div class="nome-real">Belén Aquino</div>
-        </div>
-
-        <div class="jogadora ata3" data-nome="priscila">
-            <div class="camisa-container"></div>
-            <div class="dica-letras">********</div>
-            <div class="nome-real">Priscila</div>
-        </div>
+        <div class="jogadora gol" data-nome="gabi barbieri" data-dica="**** ********"></div>
+        <div class="jogadora lat1" data-nome="tamara" data-dica="******"></div>
+        <div class="jogadora lat2" data-nome="eskerdinha" data-dica="**********"></div>
+        <div class="jogadora zag1" data-nome="isa haas" data-dica="*** ****"></div>
+        <div class="jogadora zag2" data-nome="bruna benites" data-dica="***** *******"></div>
+        <div class="jogadora meia1" data-nome="capelinha" data-dica="*********"></div>
+        <div class="jogadora meia2" data-nome="djeni" data-dica="*****"></div>
+        <div class="jogadora meia3" data-nome="leticia monteiro" data-dica="******* ********"></div>
+        <div class="jogadora ata1" data-nome="soll" data-dica="****"></div>
+        <div class="jogadora ata2" data-nome="belen aquino" data-dica="***** ******"></div>
+        <div class="jogadora ata3" data-nome="priscila" data-dica="********"></div>
     </div>
 
     <script>
         const input = document.getElementById('busca');
-        const jogadoras = document.querySelectorAll('.jogadora');
         const placar = document.getElementById('placar');
-        let cont = 0;
+        const listaJogadoras = document.querySelectorAll('.jogadora');
+        let acertos = 0;
+
+        // Monta o visual inicial (camisa + asteriscos)
+        listaJogadoras.forEach(j => {
+            j.innerHTML = `
+                <div class="camisa"></div>
+                <div class="dica">${j.getAttribute('data-dica')}</div>
+                <div class="nome-revelado">${j.getAttribute('data-nome').toUpperCase()}</div>
+            `;
+        });
 
         input.addEventListener('input', () => {
-            // Normaliza o texto removendo acentos e espaços extras
+            if (acertos >= 11) return; // Trava o jogo se já ganhou
+
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             
-            jogadoras.forEach(j => {
-                const nomeBase = j.getAttribute('data-nome').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            listaJogadoras.forEach(j => {
+                const nomeCorreto = j.getAttribute('data-nome').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 
-                if (nomeBase === digitado && !j.classList.contains('acertou')) {
+                if (digitado === nomeCorreto && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
-                    cont++;
-                    placar.innerText = cont;
+                    acertos++;
+                    placar.innerText = acertos;
                     input.value = '';
-                    
-                    // Pequeno feedback de vibração se o celular suportar
-                    if (navigator.vibrate) navigator.vibrate(50);
+
+                    if (acertos === 11) {
+                        input.disabled = true; // Desativa o campo
+                        input.placeholder = "VOCÊ VENCEU!";
+                        setTimeout(() => alert("🏆 CAMPEÃS! Você escalou o time do título!"), 300);
+                    }
                 }
             });
-
-            if(cont === 11) {
-                alert("🏆 CAMPEÃS! Você acertou a escalação completa do título!");
-            }
         });
     </script>
 </body>
