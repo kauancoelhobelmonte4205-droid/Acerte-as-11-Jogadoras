@@ -50,7 +50,6 @@
         .camisa { width: 40px; height: 40px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid black; position: relative; }
         .camisa::after { content: "?"; color: black; font-weight: bold; font-size: 16px; }
         
-        /* Dica com quebra de linha para nomes compostos */
         .dica { 
             font-family: monospace; 
             font-size: 11px; 
@@ -67,7 +66,7 @@
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posicionamento Brabas */
+        /* Posicionamento */
         .pos-gk { bottom: 10px; left: 135px; } 
         .pos-ld { bottom: 90px; left: 10px; } 
         .pos-z1 { bottom: 90px; left: 95px; } 
@@ -82,10 +81,11 @@
     </style>
 </head>
 <body>
+
     <div id="modal-inicio">
         <div class="kick-off-box">
             <h2 style="color: var(--amarelo);">KICK OFF</h2>
-            <p><b>FINAL Brasileirão Feminino A-1 2025</b></p>
+            <p><b>Brasileirão Feminino A-1 2025 - FINAL (Volta)</b></p>
             <p style="font-size: 14px; line-height: 1.6;">Corinthians 1 x 0 Cruzeiro<br>14/09/2025 - 10:30<br>Neo Química Arena</p>
             <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
         </div>
