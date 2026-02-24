@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missing 11 - Final Brasileirão 2025</title>
     <style>
-        :root { --preto-corinthians: #000000; --branco: #ffffff; --gramado: #15803d; --amarelo: #fde047; }
+        :root { --preto-corinthians: #000000; --branco: #ffffff; --gramado-claro: #15803d; --gramado-escuro: #166534; --amarelo: #fde047; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
         
         #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
@@ -20,21 +20,61 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--preto-corinthians); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        #placar { color: var(--amarelo); font-weight: bold; }
+        /* PLACAR EM BRANCO */
+        #placar { color: var(--branco); font-weight: bold; }
 
-        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
-        .jogadora { position: absolute; width: 80px; text-align: center; }
+        /* GRAMADO COM EFEITO DE CORTE */
+        .campo { 
+            position: relative; 
+            width: 350px; 
+            height: 500px; 
+            margin: 20px auto; 
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--gramado-claro),
+                var(--gramado-claro) 50px,
+                var(--gramado-escuro) 50px,
+                var(--gramado-escuro) 100px
+            );
+            border: 3px solid white; 
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Marcações Brancas do Campo */
+        .campo::before {
+            content: "";
+            position: absolute;
+            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4);
+        }
+        .campo::after {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%; width: 80px; height: 80px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .area-box {
+            position: absolute;
+            left: 50%; transform: translateX(-50%);
+            border: 2px solid rgba(255,255,255,0.4);
+            width: 180px; height: 70px;
+        }
+        .area-topo { top: -2px; }
+        .area-fundo { bottom: -2px; }
+
+        .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         
-        /* Camisa - Sempre Branca */
+        /* Camisa Branca - Número oculto por padrão */
         .camisa { width: 40px; height: 40px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid black; position: relative; }
+        .camisa::after { content: "?"; color: black; font-weight: bold; font-size: 16px; z-index: 2; }
         
-        /* O "?" aparece em preto por padrão */
-        .camisa::after { content: "?"; color: black; font-weight: bold; font-size: 16px; transition: 0.2s; z-index: 2; }
-        
-        .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; white-space: nowrap; }
+        .dica { font-family: monospace; font-size: 11px; color: var(--branco); margin-top: 5px; white-space: nowrap; letter-spacing: 1px; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        /* Estado de acerto: A camisa continua branca e o "?" vira o número preto */
+        /* Revelação no Acerto */
         .acertou .camisa::after { content: attr(data-numero); font-size: 12px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
@@ -83,6 +123,9 @@
     </div>
 
     <div class="campo">
+        <div class="area-box area-topo"></div>
+        <div class="area-box area-fundo"></div>
+
         <div class="jogadora pos-gk" data-nome="Nicole" data-num="1"></div>
         <div class="jogadora pos-ld" data-nome="Thais Ferreira" data-num="5"></div>
         <div class="jogadora pos-z1" data-nome="Erika" data-num="99"></div>
