@@ -20,10 +20,8 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--preto-corinthians); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR EM BRANCO */
         #placar { color: var(--branco); font-weight: bold; }
 
-        /* GRAMADO COM EFEITO DE CORTE */
         .campo { 
             position: relative; 
             width: 350px; 
@@ -41,45 +39,34 @@
             overflow: hidden;
         }
 
-        /* Marcações Brancas do Campo */
-        .campo::before {
-            content: "";
-            position: absolute;
-            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4);
-        }
-        .campo::after {
-            content: "";
-            position: absolute;
-            top: 50%; left: 50%; width: 80px; height: 80px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
 
-        .area-box {
-            position: absolute;
-            left: 50%; transform: translateX(-50%);
-            border: 2px solid rgba(255,255,255,0.4);
-            width: 180px; height: 70px;
-        }
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
         .area-topo { top: -2px; }
         .area-fundo { bottom: -2px; }
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
-        
-        /* Camisa Branca - Número oculto por padrão */
         .camisa { width: 40px; height: 40px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid black; position: relative; }
-        .camisa::after { content: "?"; color: black; font-weight: bold; font-size: 16px; z-index: 2; }
+        .camisa::after { content: "?"; color: black; font-weight: bold; font-size: 16px; }
         
-        .dica { font-family: monospace; font-size: 11px; color: var(--branco); margin-top: 5px; white-space: nowrap; letter-spacing: 1px; }
+        /* AJUSTE NA QUEBRA DE LINHA DOS ASTERISCOS */
+        .dica { 
+            font-family: monospace; 
+            font-size: 11px; 
+            color: var(--branco); 
+            margin-top: 5px; 
+            display: block; 
+            line-height: 1.2;
+            word-spacing: 100vw; /* Força a quebra em cada espaço */
+        }
+        
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        /* Revelação no Acerto */
         .acertou .camisa::after { content: attr(data-numero); font-size: 12px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posicionamento */
         .pos-gk { bottom: 10px; left: 135px; } 
         .pos-ld { bottom: 90px; left: 10px; } 
         .pos-z1 { bottom: 90px; left: 95px; } 
@@ -98,7 +85,6 @@
         <div class="kick-off-box">
             <h2 style="color: var(--amarelo);">KICK OFF</h2>
             <p><b>Brasileirão Feminino A-1 - FINAL</b></p>
-            <p style="font-size: 14px; line-height: 1.6;">Corinthians 1 x 0 Cruzeiro<br>14/09/2025 - 10:30<br>Neo Química Arena</p>
             <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
         </div>
     </div>
@@ -106,19 +92,18 @@
     <div id="modal-vitoria">
         <div class="kick-off-box">
             <h2 style="color: var(--amarelo);">É CAMPEÃO!</h2>
-            <p>Brabas do Timão! Você escalou o Corinthians campeão brasileiro!</p>
             <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
         </div>
     </div>
 
     <div class="nav-fases">
-        <a href="times_br.html" class="btn-nav">🏠 Menu Brasil</a>
-        <span>Final Brasileirão A-1 2025</span>
+        <a href="times_br.html" class="btn-nav">🏠 Menu</a>
+        <span>Final Brasileirão 2025</span>
         <a href="ferxpal.html" class="btn-nav">Próximo ➡</a>
     </div>
 
     <div class="painel">
-        <input type="text" id="busca" placeholder="Digite o nome da jogadora..." disabled>
+        <input type="text" id="busca" placeholder="Digite o nome..." disabled>
         <p>Acertos: <span id="placar">0</span>/11</p>
     </div>
 
@@ -148,6 +133,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
+            // Mantém os espaços originais para a quebra de linha funcionar
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
@@ -155,7 +141,6 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
                 if (digitado === correto && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
                     acertos++;
