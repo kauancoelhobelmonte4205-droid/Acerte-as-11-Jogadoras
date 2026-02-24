@@ -11,8 +11,10 @@
         .container { width: 90%; max-width: 500px; flex: 1; }
         .card-jogo { background: #222; border-radius: 15px; padding: 25px 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; }
         .card-jogo:hover { border-color: #ef4444; transform: scale(1.02); background: #282828; }
+        .card-corinthians:hover { border-color: #ffffff; } /* Hover branco para o Timão */
         .info-jogo h3 { margin: 0; font-size: 20px; font-weight: bold; }
         .btn-jogar { background: #ef4444; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+        .btn-corinthians { background: #fff; color: #000; }
         .btn-voltar { margin-top: 20px; color: #ef4444; text-decoration: none; font-size: 14px; font-weight: bold; }
     </style>
 </head>
@@ -26,11 +28,12 @@
             <div class="btn-jogar">JOGAR</div>
         </a>
 
-        <div class="card-jogo" style="opacity: 0.3; cursor: default;">
+        <a href="corinthians.html" class="card-jogo card-corinthians">
             <div class="info-jogo">
-                <h3>Em breve...</h3>
+                <h3>Corinthians (2024)</h3>
             </div>
-        </div>
+            <div class="btn-jogar btn-corinthians">JOGAR</div>
+        </a>
 
         <a href="index.html" class="btn-voltar">← Voltar ao Menu Principal</a>
     </div>
