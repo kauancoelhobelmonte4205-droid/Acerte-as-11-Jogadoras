@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleções - Brasil x EUA 2007</title>
+    <style>
+        :root { --amarelo: #fde047; --gramado: #15803d; --azul: #2563eb; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Modal de Início */
+        #modal-inicio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--amarelo); width: 80%; max-width: 400px; }
+        .btn-play { background: var(--amarelo); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-transform: uppercase; }
+
+        /* Navegação */
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; width: 100%; box-sizing: border-box; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; }
+        
+        /* Painel de Busca */
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--amarelo); position: sticky; top: 0; z-index: 10; width: 100%; box-sizing: border-box; }
+        input { padding: 12px; width: 90%; max-width: 300px; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        .placar-texto { margin: 10px 0 0 0; font-size: 14px; color: #bbb; }
+        #placar { color: var(--amarelo); font-weight: bold; font-size: 18px; }
+
+        /* Campo de Jogo */
+        .campo { position: relative; width: 350px; height: 520px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .jogadora { position: absolute; width: 80px; text-align: center; transition: 0.5s; }
+        
+        /* Camisa */
+        .camisa { width: 40px; height: 40px; background: #fbbf24; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid #000; position: relative; }
+        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.2); font-weight: bold; font-size: 14px; }
+        
+        .dica { font-family: monospace; font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 5px; letter-spacing: 1px; }
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: #fbbf24; color: #000; padding: 2px 4px; border-radius: 3px; text-transform: uppercase; }
+
+        /* Estado de Acerto */
+        .acertou .camisa { background: #fbbf24; border: 2px solid #059669; transform: scale(1.1); }
+        .acertou .camisa::after { color: rgba(0,0,0,0.8); }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Posicionamento 3-5-2 (Baseado na imagem da TV) */
+        .pos1 { bottom: 15px; left: 135px; } /* Andreia */
+        .pos4 { bottom: 90px; left: 35px; }  /* Tania */
+        .pos5 { bottom: 85px; left: 135px; } /* Renata Costa */
+        .pos3 { bottom: 90px; left: 235px; } /* Aline */
+        .pos9 { bottom: 200px; left: 10px; }  /* Maycon */
+        .pos7 { bottom: 190px; left: 135px; } /* Daniela */
+        .pos2 { bottom: 200px; left: 260px; } /* Elane */
+        .pos20 { bottom: 275px; left: 70px; } /* Ester */
+        .pos8 { bottom: 275px; left: 200px; } /* Formiga */
+        .pos10 { top: 65px; left: 70px; }     /* Marta */
+        .pos11 { top: 65px; left: 200px; }    /* Cristiane */
+    </style>
+</head>
+<body>
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2>KICK OFF</h2>
+            <p><b>Copa do Mundo Feminina 2007</b></p>
+            <p style="font-size: 14px; line-height: 1.6; color: #bbb;">Brasil 4 x 0 EUA<br>Semifinal • Hangzhou, China</p>
+            <button class="btn-play" onclick="iniciarJogo()">Jogar</button>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="index.html" class="btn-nav">🏠 Menu</a>
+        <span style="font-size: 13px; font-weight: bold;">SELEÇÃO BRASILEIRA 2007</span>
+        <button class="btn-nav" style="opacity: 0.3; cursor: not-allowed;">Próximo ➡</button>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Quem jogou?" disabled>
+        <p class="placar-texto">Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="jogadora pos1" data-nome="Andreia" data-num="1"></div>
+        <div class="jogadora pos4" data-nome="Tania" data-num="4"></div>
+        <div class="jogadora pos5" data-nome="Renata Costa" data-num="5"></div>
+        <div class="jogadora pos3" data-nome="Aline" data-num="3"></div>
+        <div class="jogadora pos9" data-nome="Maycon" data-num="9"></div>
+        <div class="jogadora pos7" data-nome="Daniela" data-num="7"></div>
+        <div class="jogadora pos2" data-nome="Elane" data-num="2"></div>
+        <div class="jogadora pos20" data-nome="Ester" data-num="20"></div>
+        <div class="jogadora pos8" data-nome="Formiga" data-num="8"></div>
+        <div class="jogadora pos10" data-nome="Marta" data-num="10"></div>
+        <div class="jogadora pos11" data-nome="Cristiane" data-num="11"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        let acertos = 0;
+
+        // Inicializa o campo com as dicas
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `
+                <div class="camisa" data-numero="${num}"></div>
+                <div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div>
+                <div class="nome-revelado">${nome}</div>
+            `;
+        });
+
+        function iniciarJogo() {
+            document.getElementById('modal-inicio').style.display = 'none';
+            input.disabled = false;
+            input.focus();
+        }
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    
+                    if(acertos === 11) {
+                        alert("Sensacional! Você escalou o time que deu um baile nos EUA!");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
