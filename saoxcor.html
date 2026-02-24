@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - Final Supercopa 2025</title>
+    <style>
+        :root { --spfc-vermelho: #ff0000; --spfc-preto: #000000; --branco: #ffffff; --gramado: #15803d; --amarelo: #fde047; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
+        .kick-off-box { background: #222; padding: 30px; border-radius: 20px; border: 1px solid #333; width: 80%; max-width: 400px; }
+        .btn-play, .btn-proximo { background: var(--branco); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--spfc-vermelho); position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        #placar { color: var(--amarelo); font-weight: bold; }
+
+        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
+        .jogadora { position: absolute; width: 80px; text-align: center; }
+        .camisa { width: 38px; height: 38px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid var(--spfc-preto); position: relative; }
+        
+        .camisa::before { content: ""; position: absolute; top: 40%; width: 100%; height: 3px; background: linear-gradient(to bottom, var(--spfc-vermelho) 50%, var(--spfc-preto) 50%); }
+        .camisa::after { content: attr(data-numero); color: rgba(0,0,0,0.7); font-weight: bold; font-size: 10px; z-index: 2; }
+        
+        .dica { font-family: monospace; font-size: 9px; color: #bbb; margin-top: 4px; white-space: nowrap; }
+        .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 4px; background: white; color: black; padding: 2px; border-radius: 3px; text-transform: uppercase; }
+        
+        .acertou .camisa { background: var(--spfc-preto); border-color: var(--spfc-vermelho); }
+        .acertou .camisa::after { color: white; }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Posicionamento 4-1-4-1 (Baseado no print) */
+        .pos12 { bottom: 10px; left: 135px; } /* Carlinha */
+        .pos2 { bottom: 85px; left: 5px; }   /* Bruna calderan */
+        .pos3 { bottom: 75px; left: 90px; }  /* Kaká */
+        .pos4 { bottom: 75px; left: 180px; } /* Day Silva */
+        .pos23 { bottom: 85px; left: 265px; }/* Bia Menezes */
+        .pos95 { bottom: 170px; left: 135px; }/* Robinha */
+        .pos77 { top: 190px; left: 10px; }  /* Isa */
+        .pos7 { top: 180px; left: 95px; }   /* Aline Milene */
+        .pos10 { top: 180px; left: 175px; } /* Camilinha */
+        .pos11 { top: 190px; left: 260px; } /* Dudinha */
+        .pos19 { top: 90px; left: 135px; }  /* Crivelari */
+    </style>
+</head>
+<body>
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--spfc-vermelho);">SÃO PAULO x CORINTHIANS</h2>
+            <p><b>Supercopa Feminina - FINAL</b></p>
+            <p style="font-size: 13px; line-height: 1.6;">São Paulo 0 (4) x (3) 0 Corinthians<br>15/03/2025 - 16:30<br>Estádio do Morumbi</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--spfc-vermelho);">TRICOLOR CAMPEÃO!</h2>
+            <p>Soberanas! Você escalou o São Paulo campeão da Supercopa!</p>
+            <a href="times_br.html" class="btn-proximo">VOLTAR</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="times_br.html" class="btn-nav">🏠 Menu Brasil</a>
+        <span>Supercopa 2025</span>
+        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o nome..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="jogadora pos12" data-nome="Carlinha" data-num="12"></div>
+        <div class="jogadora pos2" data-nome="Bruna calderan" data-num="2"></div>
+        <div class="jogadora pos3" data-nome="Kaká" data-num="3"></div>
+        <div class="jogadora pos4" data-nome="Day Silva" data-num="4"></div>
+        <div class="jogadora pos23" data-nome="Bia Menezes" data-num="23"></div>
+        <div class="jogadora pos95" data-nome="Robinha" data-num="95"></div>
+        <div class="jogadora pos77" data-nome="Isa" data-num="77"></div>
+        <div class="jogadora pos7" data-nome="Aline Milene" data-num="7"></div>
+        <div class="jogadora pos10" data-nome="Camilinha" data-num="10"></div>
+        <div class="jogadora pos11" data-nome="Dudinha" data-num="11"></div>
+        <div class="jogadora pos19" data-nome="Crivelari" data-num="19"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
+        let acertos = 0;
+
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome}</div>`;
+        });
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    if (acertos === 11) { setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
