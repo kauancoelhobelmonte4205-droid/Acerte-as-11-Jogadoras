@@ -31,6 +31,7 @@
         /* O "?" aparece aqui por padrão */
         .camisa::after { content: "?"; color: var(--branco); font-weight: bold; font-size: 16px; transition: 0.2s; z-index: 2; }
         
+        /* Asteriscos embaixo da camisa */
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; white-space: nowrap; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
@@ -48,7 +49,36 @@
     </style>
 </head>
 <body>
-    <div class="campo" id="campo-jogo">
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--verde-palmeiras);">KICK OFF</h2>
+            <p><b>Copa do Brasil - FINAL</b></p>
+            <p style="font-size: 14px; line-height: 1.6;">Ferroviária 2 x 4 Palmeiras<br>20/11/2025 - 15:30<br>Fonte Luminosa</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--verde-palmeiras);">CAMPEÃS!</h2>
+            <p>Parabéns! Você escalou o Palmeiras campeão da Copa do Brasil!</p>
+            <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="times_br.html" class="btn-nav">🏠 Menu Brasil</a>
+        <span>Final CDB 2025</span>
+        <a href="intxsan.html" class="btn-nav">Próximo ➡</a>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o nome da jogadora..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
         <div class="jogadora pos25" data-nome="Kate Tapia" data-num="25"></div>
         <div class="jogadora pos6" data-nome="Fe Palermo" data-num="6"></div>
         <div class="jogadora pos13" data-nome="Pati Maldaner" data-num="13"></div>
@@ -71,7 +101,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
-            // Mantendo os asteriscos na classe .dica
+            // Mantendo os asteriscos na dica embaixo
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
