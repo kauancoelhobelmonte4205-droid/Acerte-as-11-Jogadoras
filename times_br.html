@@ -9,9 +9,27 @@
         header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #ef4444; margin-bottom: 30px; }
         h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; color: #ef4444; }
         .container { width: 90%; max-width: 500px; flex: 1; }
-        .card { background: #222; border-radius: 15px; padding: 25px 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: block; text-align: left; }
+        
+        .card { 
+            background: #222; 
+            border-radius: 15px; 
+            padding: 25px 20px; 
+            margin-bottom: 15px; 
+            border: 1px solid #444; 
+            transition: 0.3s; 
+            text-decoration: none; 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            text-align: left; 
+        }
+        
         .card:hover { border-color: #ef4444; transform: translateY(-5px); background: #282828; }
-        .card h2 { margin: 0; font-size: 18px; font-weight: bold; }
+        
+        .card-info h2 { margin: 0; font-size: 15px; font-weight: bold; text-transform: uppercase; line-height: 1.2; }
+        .card-info span { color: #ef4444; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px; }
+
         .nav-voltar { margin-bottom: 20px; display: inline-block; color: #aaa; text-decoration: none; font-size: 14px; }
         .nav-voltar:hover { color: white; }
     </style>
@@ -24,15 +42,24 @@
         <a href="index.html" class="nav-voltar">⬅ Voltar ao Início</a>
 
         <a href="intxsan.html" class="card" style="border-left: 5px solid #ef4444;">
-            <h2>Internacional x Santos </h2>
+            <div class="card-info">
+                <h2>Internacional x Santos </h2>
+                <span>➔ JOGAR</span>
+            </div>
         </a>
 
         <a href="corxpal.html" class="card" style="border-left: 5px solid #ffffff;">
-            <h2>Corinthians x Palmeiras (Libertadores 2023)</h2>
+            <div class="card-info">
+                <h2>Corinthians x Palmeiras (Libertadores Feminina 2023)</h2>
+                <span>➔ JOGAR</span>
+            </div>
         </a>
 
         <a href="corxpal2.html" class="card" style="border-left: 5px solid #ffffff;">
-            <h2>Corinthians x Palmeiras (Paulistão 2023)</h2>
+            <div class="card-info">
+                <h2>Corinthians x Palmeiras (Paulistão Feminino 2023)</h2>
+                <span>➔ JOGAR</span>
+            </div>
         </a>
 
     </div>
