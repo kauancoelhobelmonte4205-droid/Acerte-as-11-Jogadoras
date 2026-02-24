@@ -14,13 +14,12 @@
         .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--vermelho); width: 80%; max-width: 400px; }
         .btn-play, .btn-proximo { background: var(--vermelho); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-decoration: none; display: inline-block; }
         
-        /* CAMPO COM EFEITO DE CORTE DE GRAMA */
+        /* CAMPO COM CORTE PROFISSIONAL */
         .campo { 
             position: relative; 
             width: 350px; 
             height: 500px; 
             margin: 20px auto; 
-            /* Aqui cria o efeito de listras */
             background: repeating-linear-gradient(
                 to bottom,
                 var(--gramado-claro),
@@ -33,50 +32,53 @@
             overflow: hidden;
         }
 
-        /* Linhas do Campo (Áreas e Círculo) */
+        /* Linhas do Estádio */
         .campo::before {
             content: "";
             position: absolute;
-            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.5); /* Linha de meio campo */
+            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4);
         }
         .campo::after {
             content: "";
             position: absolute;
             top: 50%; left: 50%; width: 80px; height: 80px;
-            border: 2px solid rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.4);
             border-radius: 50%;
-            transform: translate(-50%, -50%); /* Círculo central */
+            transform: translate(-50%, -50%);
         }
 
         .area-box {
             position: absolute;
             left: 50%; transform: translateX(-50%);
-            border: 2px solid rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.4);
             width: 180px; height: 70px;
         }
         .area-topo { top: -2px; }
         .area-fundo { bottom: -2px; }
 
-        /* JOGADORAS E CAMISAS */
+        /* JOGADORAS */
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         .camisa { width: 40px; height: 40px; background: var(--vermelho); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid white; position: relative; }
+        
+        /* Interrogação Limpo */
         .camisa::after { content: "?"; color: var(--branco); font-weight: bold; font-size: 16px; }
         
-        .dica { font-family: monospace; font-size: 13px; color: #eee; margin-top: 5px; text-shadow: 1px 1px 2px black; }
-        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--branco); color: var(--vermelho); padding: 2px; border-radius: 3px; }
+        /* Asteriscos sem sombra e com cor nítida */
+        .dica { font-family: monospace; font-size: 13px; color: var(--branco); margin-top: 5px; letter-spacing: 1px; }
+        
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--branco); color: var(--vermelho); padding: 2px; border-radius: 3px; text-transform: uppercase; }
         
         .acertou .camisa::after { content: attr(data-num); font-size: 13px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
         
-        /* Posicionamento 4-3-3 */
+        /* Formação */
         .gol { bottom: 10px; left: 135px; } 
         .zag1 { bottom: 85px; left: 75px; } .zag2 { bottom: 85px; left: 195px; }
         .lat1 { bottom: 110px; left: 5px; } .lat2 { bottom: 110px; left: 265px; }
         .meia1 { bottom: 200px; left: 45px; } .meia2 { bottom: 230px; left: 135px; } .meia3 { bottom: 200px; left: 225px; }
         .ata1 { top: 110px; left: 25px; } .ata2 { top: 70px; left: 135px; } .ata3 { top: 110px; left: 245px; }
 
-        /* Painel e Nav */
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
@@ -89,7 +91,16 @@
         <div class="kick-off-box">
             <h2>KICK OFF</h2>
             <p><b>Brasil Ladies Cup 2023 - FINAL</b></p>
-            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">PLAY</button>
+            <p style="font-size: 14px; line-height: 1.6;">Internacional x Santos<br>10/12/2023<br>Estádio do Canindé</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: #4ade80;">É CAMPEÃO!</h2>
+            <p>Você escalou o Internacional campeão da Ladies Cup!</p>
+            <a href="index.html" class="btn-proximo">VOLTAR</a>
         </div>
     </div>
 
@@ -100,7 +111,7 @@
     </div>
 
     <div class="painel">
-        <input type="text" id="busca" placeholder="Digite o nome..." disabled>
+        <input type="text" id="busca" placeholder="Digite o nome da jogadora..." disabled>
         <p>Acertos: <span id="placar">0</span>/11</p>
     </div>
 
@@ -124,11 +135,12 @@
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
         let acertos = 0;
 
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
-            j.innerHTML = `<div class="camisa" data-num="${j.getAttribute('data-num')}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+            j.innerHTML = `<div class="camisa" data-num="${j.getAttribute('data-num')}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome}</div>`;
         });
 
         input.addEventListener('input', () => {
@@ -140,6 +152,9 @@
                     acertos++; 
                     document.getElementById('placar').innerText = acertos; 
                     input.value = '';
+                    if (acertos === 11) {
+                        setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500);
+                    }
                 }
             });
         });
