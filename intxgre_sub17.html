@@ -20,10 +20,9 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho-inter); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR EM VERMELHO */
-        #placar { color: var(--vermelho-inter); font-weight: bold; background: white; padding: 2px 8px; border-radius: 4px; }
+        /* PLACAR VERMELHO LISO (Sem fundo branco) */
+        #placar { color: var(--vermelho-inter); font-weight: bold; }
 
-        /* CAMPO COM LISTRAS E MARCAÇÕES */
         .campo { 
             position: relative; 
             width: 350px; 
@@ -50,9 +49,8 @@
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         .camisa { width: 40px; height: 40px; background: var(--vermelho-inter); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid white; position: relative; }
-        .camisa::after { content: attr(data-numero); color: rgba(255,255,255,0.4); font-weight: bold; font-size: 10px; }
+        .camisa::after { content: "?"; color: rgba(255,255,255,0.5); font-weight: bold; font-size: 14px; }
         
-        /* DICA COM QUEBRA DE LINHA */
         .dica { 
             font-family: monospace; 
             font-size: 11px; 
@@ -65,8 +63,9 @@
 
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
+        /* Ajuste no acerto: Camisa fica branca e revela o número em vermelho */
         .acertou .camisa { background: white; border-color: var(--vermelho-inter); }
-        .acertou .camisa::after { color: var(--vermelho-inter); content: attr(data-numero); font-size: 12px; }
+        .acertou .camisa::after { content: attr(data-numero); color: var(--vermelho-inter); font-size: 13px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
@@ -133,6 +132,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
+            // Inicializa com asteriscos (escondido)
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
