@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times Brasileiros - Menu</title>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #ef4444; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 22px; text-transform: uppercase; color: #ef4444; }
+        .container { width: 90%; max-width: 500px; flex: 1; }
+        .card-jogo { background: #222; border-radius: 15px; padding: 25px 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; }
+        .card-jogo:hover { border-color: #ef4444; transform: scale(1.02); background: #282828; }
+        .info-jogo h3 { margin: 0; font-size: 20px; font-weight: bold; }
+        .btn-jogar { background: #ef4444; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+        .btn-voltar { margin-top: 20px; color: #ef4444; text-decoration: none; font-size: 14px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header><h1>🇧🇷 Times Brasileiros</h1></header>
+    <div class="container">
+        <a href="intxsan.html" class="card-jogo">
+            <div class="info-jogo">
+                <h3>Inter x Santos</h3>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
+        <div class="card-jogo" style="opacity: 0.3; cursor: default;">
+            <div class="info-jogo">
+                <h3>Em breve...</h3>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-voltar">← Voltar ao Menu Principal</a>
+    </div>
+</body>
+</html>
