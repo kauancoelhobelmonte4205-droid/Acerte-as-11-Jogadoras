@@ -3,79 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Gurias Coloradas</title>
+    <title>Missing 11 - Menu Principal</title>
     <style>
-        :root { --vermelho: #ef4444; --gramado: #15803d; }
-        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
-        #modal-inicio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--vermelho); width: 80%; max-width: 400px; }
-        .btn-play { background: var(--vermelho); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; }
-        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
-        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
-        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho); position: sticky; top: 0; z-index: 10; }
-        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
-        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
-        .jogadora { position: absolute; width: 80px; text-align: center; }
-        .camisa { width: 40px; height: 40px; background: #444; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
-        .camisa::after { content: "?"; color: rgba(255,255,255,0.2); font-weight: bold; }
-        .dica { font-family: monospace; font-size: 14px; color: #bbb; margin-top: 5px; }
-        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--vermelho); padding: 2px; border-radius: 3px; }
-        .acertou .camisa { background: var(--vermelho); }
-        .acertou .camisa::after { content: ""; }
-        .acertou .dica { display: none; }
-        .acertou .nome-revelado { display: block; }
-        .gol { bottom: 10px; left: 135px; } .zag1 { bottom: 80px; left: 60px; } .zag2 { bottom: 80px; left: 210px; }
-        .lat1 { bottom: 130px; left: 5px; } .lat2 { bottom: 130px; left: 265px; }
-        .meia1 { bottom: 220px; left: 30px; } .meia2 { bottom: 250px; left: 135px; } .meia3 { bottom: 220px; left: 240px; }
-        .ata1 { top: 60px; left: 30px; } .ata2 { top: 20px; left: 135px; } .ata3 { top: 60px; left: 240px; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #ef4444; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; color: #ef4444; }
+        .container { width: 90%; max-width: 500px; flex: 1; }
+        .card { background: #222; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: block; }
+        .card:hover { border-color: #ef4444; transform: translateY(-5px); background: #282828; }
+        .card h2 { margin: 0 0 10px 0; font-size: 22px; }
+        .card p { margin: 0; color: #bbb; font-size: 14px; }
+        .instagram-btn { margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .instagram-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4); }
+        .footer-info { padding: 30px; font-size: 13px; color: #666; }
     </style>
 </head>
 <body>
-    <div id="modal-inicio">
-        <div class="kick-off-box">
-            <h2>KICK OFF</h2>
-            <p><b>Brasil Ladies Cup 2023 - FINAL</b></p>
-            <p style="font-size: 14px; line-height: 1.6;">
-                Internacional x Santos<br>
-                10/12/2023 - 16:00<br>
-                Estádio do Canindé
-            </p>
-            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button>
-        </div>
+    <header><h1>MISSING 11 BR</h1></header>
+    <div class="container">
+        <a href="intxsan.html" class="card">
+            <h2>🇧🇷 Times Brasileiros</h2>
+            <p>Inter, Corinthians e as maiores do Brasil.</p>
+        </a>
+        <a href="#" class="card" style="opacity: 0.6; cursor: not-allowed;">
+            <h2>🇪🇺 Times Europeus</h2>
+            <p>Em breve: Real Madrid, Barcelona e mais.</p>
+        </a>
+        <a href="https://www.instagram.com/kauann__sci?igsh=MWUybXJpaHB2bGZ2Yw%3D%3D&utm_source=qr" target="_blank" class="instagram-btn">
+            📸 @kauann__sci
+        </a>
     </div>
-    
-    <div class="nav-fases">
-        <button class="btn-nav" style="opacity: 0.3;">⬅ Anterior</button>
-        <span>Escalação 1</span>
-        <a href="corxpal.html" class="btn-nav">Próximo ➡</a>
-    </div>
-
-    <div class="painel"><input type="text" id="busca" placeholder="Digite o nome..." disabled><p>Acertos: <span id="placar">0</span>/11</p></div>
-    
-    <div class="campo">
-        <div class="jogadora gol" data-nome="Gabi Barbieri"></div><div class="jogadora lat1" data-nome="Tamara"></div><div class="jogadora lat2" data-nome="Eskerdinha"></div>
-        <div class="jogadora zag1" data-nome="Isa Haas"></div><div class="jogadora zag2" data-nome="Bruna Benites"></div><div class="jogadora meia1" data-nome="Capelinha"></div>
-        <div class="jogadora meia2" data-nome="Djeni"></div><div class="jogadora meia3" data-nome="Leticia Monteiro"></div><div class="jogadora ata1" data-nome="Soll"></div>
-        <div class="jogadora ata2" data-nome="Belen Aquino"></div><div class="jogadora ata3" data-nome="Priscila"></div>
-    </div>
-
-    <script>
-        const input = document.getElementById('busca');
-        const lista = document.querySelectorAll('.jogadora');
-        let acertos = 0;
-        lista.forEach(j => {
-            const nome = j.getAttribute('data-nome');
-            j.innerHTML = `<div class="camisa"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
-        });
-        input.addEventListener('input', () => {
-            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-            lista.forEach(j => {
-                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                if (digitado === correto && !j.classList.contains('acertou')) {
-                    j.classList.add('acertou'); acertos++; document.getElementById('placar').innerText = acertos; input.value = '';
-                }
-            });
-        });
-    </script>
+    <div class="footer-info">Criado por Kauan • 2024</div>
 </body>
 </html>
