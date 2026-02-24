@@ -1,81 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escalação 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - Gurias Coloradas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: white;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #0b6623;
-    color: white;
-}
+        h1 { margin: 15px 0; color: #f87171; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-h1 {
-    margin: 15px 0;
-}
+        .search-container { margin-bottom: 20px; }
+        
+        input {
+            padding: 12px;
+            width: 280px;
+            border-radius: 25px;
+            border: 2px solid #ef4444;
+            font-size: 16px;
+            outline: none;
+        }
 
-.campo {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 600px;
-    margin: auto;
-    background: #15803d;
-    border: 3px solid white;
-    border-radius: 10px;
-}
+        /* O Campo de Jogo */
+        .campo {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 620px;
+            margin: auto;
+            background: #15803d;
+            border: 5px solid white;
+            border-radius: 15px;
+            /* Gramado */
+            background-image: repeating-linear-gradient(#15803d, #15803d 40px, #166534 40px, #166534 80px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-.jogadora {
-    position: absolute;
-    width: 90px;
-    font-size: 12px;
-    font-weight: bold;
-}
+        /* Container da Jogadora */
+        .jogadora {
+            position: absolute;
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
 
-.gol { top: 550px; left: 155px; }
-.zag1 { top: 470px; left: 70px; }
-.zag2 { top: 470px; left: 240px; }
-.lat1 { top: 420px; left: 10px; }
-.lat2 { top: 420px; left: 300px; }
+        /* Estilo da Camisa */
+        .camisa-img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(1) opacity(0.3); /* Fica branca/apagada antes de acertar */
+            transition: filter 0.5s ease;
+        }
 
-.meia1 { top: 330px; left: 40px; }
-.meia2 { top: 300px; left: 155px; }
-.meia3 { top: 330px; left: 270px; }
+        /* Estilo do Nome */
+        .nome-display {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-top: 5px;
+            min-width: 60px;
+            height: 14px;
+            visibility: hidden; /* Esconde o nome até acertar */
+        }
 
-.ata1 { top: 200px; left: 40px; }
-.ata2 { top: 160px; left: 155px; }
-.ata3 { top: 200px; left: 270px; }
+        /* Quando acertar (Classe ativada pelo JS) */
+        .jogadora.revelada .camisa-img {
+            filter: brightness(1) opacity(1); /* Mostra a cor real da camisa */
+        }
 
-</style>
-</head>
+        .jogadora.revelada .nome-display {
+            visibility: visible; /* Mostra o nome */
+            background: #ef4444; /* Fundo vermelho do Inter */
+        }
 
-<body>
-
-<h1>Escalação 1</h1>
-
-<div class="campo">
-
-<div class="jogadora gol">Gabi Barbieri</div>
-
-<div class="jogadora lat1">Tamara</div>
-<div class="jogadora lat2">Eskerdinha</div>
-
-<div class="jogadora zag1">Isa Haas</div>
-<div class="jogadora zag2">Bruna Benites</div>
-
-<div class="jogadora meia1">Capelinha</div>
-<div class="jogadora meia2">Djeni</div>
-<div class="jogadora meia3">Letícia Monteiro</div>
-
-<div class="jogadora ata1">Soll</div>
-<div class="jogadora ata2">Belén Aquino</div>
-<div class="jogadora ata3">Priscila</div>
-
-</div>
-
-</body>
-</html>
+        /* POSICIONAMENTO (4-3-3) */
+        .gol { top: 530px; left: 175px; }
+        .lat1 { top: 430px; left: 20px; }
+        .lat2 { top: 430px; left: 330px; }
+        .zag1 { top: 460px; left: 100px; }
+        .zag2 { top: 460px; left: 250px; }
+        .meia1 { top: 310px; left: 50px; }
+        .meia2 { top: 290px; left: 175px; }
+        .meia3 { top: 310px; left: 300px; }
+        .ata1 { top: 150px; left: 50px; }
+        .ata2 { top: 110px; left: 175px; }
