@@ -3,68 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Inter</title>
+    <title>Inter x Santos - Acerte as 11</title>
     <style>
-        :root { --vermelho: #ef4444; --gramado: #15803d; }
-        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        :root { --cor-tema: #ef4444; --gramado: #15803d; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        
         #modal-inicio { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--vermelho); width: 80%; max-width: 400px; }
-        .btn-play { background: var(--vermelho); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; }
-        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
-        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
-        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho); position: sticky; top: 0; z-index: 10; }
-        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
-        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
+        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--cor-tema); width: 80%; max-width: 400px; }
+        .btn-play { background: var(--cor-tema); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-transform: uppercase; }
+
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; width: 100%; box-sizing: border-box; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor-tema); position: sticky; top: 0; z-index: 10; width: 100%; box-sizing: border-box; }
+        input { padding: 12px; width: 90%; max-width: 300px; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        .placar-texto { margin: 10px 0 0 0; font-size: 14px; color: #bbb; }
+        #placar { color: var(--cor-tema); font-weight: bold; font-size: 22px; }
+
+        .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         .jogadora { position: absolute; width: 80px; text-align: center; }
-        .camisa { width: 40px; height: 40px; background: #444; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
-        .camisa::after { content: "?"; color: rgba(255,255,255,0.2); font-weight: bold; }
-        .dica { font-family: monospace; font-size: 14px; color: #bbb; margin-top: 5px; }
-        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--vermelho); padding: 2px; border-radius: 3px; }
-        .acertou .camisa { background: var(--vermelho); }
-        .acertou .camisa::after { content: ""; }
+        .camisa { width: 40px; height: 40px; background: #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid #000; }
+        
+        .dica { font-family: monospace; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px; letter-spacing: 1px; }
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: var(--cor-tema); color: white; padding: 2px 4px; border-radius: 3px; }
+
+        .acertou .camisa { background: var(--cor-tema); border: 2px solid white; transform: scale(1.1); }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
-        .gol { bottom: 10px; left: 135px; } .zag1 { bottom: 80px; left: 60px; } .zag2 { bottom: 80px; left: 210px; }
-        .lat1 { bottom: 130px; left: 5px; } .lat2 { bottom: 130px; left: 265px; }
-        .meia1 { bottom: 220px; left: 30px; } .meia2 { bottom: 250px; left: 135px; } .meia3 { bottom: 220px; left: 240px; }
-        .ata1 { top: 60px; left: 30px; } .ata2 { top: 20px; left: 135px; } .ata3 { top: 60px; left: 240px; }
+
+        /* Posições 4-3-3 Clássico */
+        .pos1 { bottom: 10px; left: 135px; }
+        .pos2 { bottom: 80px; left: 20px; } .pos3 { bottom: 70px; left: 95px; } .pos4 { bottom: 70px; left: 175px; } .pos5 { bottom: 80px; left: 255px; }
+        .pos6 { bottom: 180px; left: 40px; } .pos7 { bottom: 170px; left: 135px; } .pos8 { bottom: 180px; left: 230px; }
+        .pos9 { top: 70px; left: 40px; } .pos10 { top: 50px; left: 135px; } .pos11 { top: 70px; left: 230px; }
     </style>
 </head>
 <body>
     <div id="modal-inicio">
         <div class="kick-off-box">
             <h2>KICK OFF</h2>
-            <p><b>Brasil Ladies Cup 2023 - FINAL</b></p>
-            <p style="font-size: 14px; line-height: 1.6;">Internacional x Santos<br>10/12/2023 - 16:00<br>Estádio do Canindé</p>
-            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button>
+            <p><b>Inter x Santos</b></p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
         </div>
     </div>
+
     <div class="nav-fases">
-        <a href="index.html" class="btn-nav">🏠 Menu</a>
-        <span>Escalação 1</span>
-        <a href="corxpal.html" class="btn-nav">Próximo ➡</a>
+        <a href="times_br.html" class="btn-nav">🏠 Menu</a>
+        <span style="font-weight: bold; font-size: 13px;">DESAFIO BRASILEIRO</span>
+        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
     </div>
-    <div class="painel"><input type="text" id="busca" placeholder="Digite o nome..." disabled><p>Acertos: <span id="placar">0</span>/11</p></div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o nome..." disabled>
+        <p class="placar-texto">Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
     <div class="campo">
-        <div class="jogadora gol" data-nome="Gabi Barbieri"></div><div class="jogadora lat1" data-nome="Tamara"></div><div class="jogadora lat2" data-nome="Eskerdinha"></div>
-        <div class="jogadora zag1" data-nome="Isa Haas"></div><div class="jogadora zag2" data-nome="Bruna Benites"></div><div class="jogadora meia1" data-nome="Capelinha"></div>
-        <div class="jogadora meia2" data-nome="Djeni"></div><div class="jogadora meia3" data-nome="Leticia Monteiro"></div><div class="jogadora ata1" data-nome="Soll"></div>
-        <div class="jogadora ata2" data-nome="Belen Aquino"></div><div class="jogadora ata3" data-nome="Priscila"></div>
+        <div class="jogadora pos1" data-nome="Goleira"></div>
+        <div class="jogadora pos2" data-nome="Lateral Direita"></div>
+        <div class="jogadora pos3" data-nome="Zagueira 1"></div>
+        <div class="jogadora pos4" data-nome="Zagueira 2"></div>
+        <div class="jogadora pos5" data-nome="Lateral Esquerda"></div>
+        <div class="jogadora pos6" data-nome="Meio Campo 1"></div>
+        <div class="jogadora pos7" data-nome="Meio Campo 2"></div>
+        <div class="jogadora pos8" data-nome="Meio Campo 3"></div>
+        <div class="jogadora pos9" data-nome="Atacante 1"></div>
+        <div class="jogadora pos10" data-nome="Atacante 2"></div>
+        <div class="jogadora pos11" data-nome="Atacante 3"></div>
     </div>
+
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
         let acertos = 0;
+
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             j.innerHTML = `<div class="camisa"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
+
         input.addEventListener('input', () => {
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 if (digitado === correto && !j.classList.contains('acertou')) {
-                    j.classList.add('acertou'); acertos++; document.getElementById('placar').innerText = acertos; input.value = '';
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
                 }
             });
         });
