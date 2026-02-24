@@ -20,10 +20,8 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho-arsenal); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* COR DO PLACAR EM VERMELHO */
         #placar { color: var(--vermelho-arsenal); font-weight: bold; }
 
-        /* GRAMADO COM EFEITO DE CORTE */
         .campo { 
             position: relative; 
             width: 350px; 
@@ -41,37 +39,29 @@
             overflow: hidden;
         }
 
-        /* Linhas do Campo */
-        .campo::before {
-            content: "";
-            position: absolute;
-            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4);
-        }
-        .campo::after {
-            content: "";
-            position: absolute;
-            top: 50%; left: 50%; width: 80px; height: 80px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
 
-        .area-box {
-            position: absolute;
-            left: 50%; transform: translateX(-50%);
-            border: 2px solid rgba(255,255,255,0.4);
-            width: 180px; height: 70px;
-        }
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
         .area-topo { top: -2px; }
         .area-fundo { bottom: -2px; }
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         
-        /* Camisa Arsenal */
         .camisa { width: 40px; height: 40px; background: var(--vermelho-arsenal); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid white; position: relative; }
         .camisa::after { content: "?"; color: rgba(255,255,255,0.6); font-weight: bold; font-size: 14px; }
         
-        .dica { font-family: monospace; font-size: 11px; color: var(--branco); margin-top: 5px; white-space: nowrap; }
+        /* Ajuste de quebra de linha nos asteriscos */
+        .dica { 
+            font-family: monospace; 
+            font-size: 11px; 
+            color: var(--branco); 
+            margin-top: 5px; 
+            display: block; 
+            line-height: 1.1;
+            word-spacing: 100vw; 
+        }
+
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
         .acertou .camisa { background: white; border-color: var(--vermelho-arsenal); }
@@ -149,7 +139,6 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
                 if (digitado === correto && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
                     acertos++;
