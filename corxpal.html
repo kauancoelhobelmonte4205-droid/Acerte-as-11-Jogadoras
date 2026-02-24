@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Jogo 2</title>
+    <title>Missing 11 - Corinthians</title>
     <style>
         :root { --cor: #ffffff; --gramado: #15803d; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
@@ -13,7 +13,7 @@
         .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
         .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor); position: sticky; top: 0; z-index: 10; }
-        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         .campo { position: relative; width: 350px; height: 500px; margin: 20px auto; background: var(--gramado); border: 3px solid white; border-radius: 10px; }
         .jogadora { position: absolute; width: 80px; text-align: center; }
         .camisa { width: 40px; height: 40px; background: #f0f0f0; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
@@ -32,14 +32,22 @@
 </head>
 <body>
     <div id="modal-inicio"><div class="kick-off-box"><h2>KICK OFF</h2><p>Libertadores Feminina 2023 - FINAL<br>Palmeiras 0 x 1 Corinthians</p><button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;">PLAY</button></div></div>
-    <div class="nav-fases"><a href="index.html" class="btn-nav">⬅ Jogo Anterior</a><span>Escalação 2</span><button class="btn-nav" disabled>Próximo ➡</button></div>
+    
+    <div class="nav-fases">
+        <a href="index.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <span>Escalação 2</span>
+        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+    </div>
+
     <div class="painel"><input type="text" id="busca" placeholder="Digite o nome..." disabled><p>Acertos: <span id="placar">0</span>/11</p></div>
-    <div class="campo" id="campo-jogo">
-        <div class="jogadora gol" data-nome="Lele"></div><div class="jogadora lat1" data-nome="Katiuscia"></div><div class="jogadora lat2" data-nome="Yasmim"></div>
+    
+    <div class="campo">
+        <div class="jogadora gol" data-nome="Lele"></div><div class="jogadora lat1" data-nome="Katiuscia"></div><div class="jogadora lat2" data-nome="Yasmin"></div>
         <div class="jogadora zag1" data-nome="Tarciane"></div><div class="jogadora zag2" data-nome="Mariza"></div><div class="jogadora meia1" data-nome="Luana"></div>
         <div class="jogadora meia2" data-nome="Gabi Zanotti"></div><div class="jogadora meia3" data-nome="Vic Albuquerque"></div><div class="jogadora ata1" data-nome="Tamires"></div>
         <div class="jogadora ata2" data-nome="Millene"></div><div class="jogadora ata3" data-nome="Gabi Portilho"></div>
     </div>
+
     <script>
         const input = document.getElementById('busca');
         const lista = document.querySelectorAll('.jogadora');
@@ -52,9 +60,13 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                if (digitado === correto && !j.classList.contains('acertou')) {
+                
+                // Aceita variações da Yasmin
+                let match = (digitado === correto);
+                if (correto === "yasmin" && (digitado === "yasmim" || digitado === "iasmim" || digitado === "iasmin")) match = true;
+
+                if (match && !j.classList.contains('acertou')) {
                     j.classList.add('acertou'); acertos++; document.getElementById('placar').innerText = acertos; input.value = '';
-                    if (acertos === 11) alert("🏆 Parabéns!");
                 }
             });
         });
