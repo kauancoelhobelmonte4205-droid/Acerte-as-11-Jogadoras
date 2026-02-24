@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missing 11 - Final Brasileirão Sub-18</title>
     <style>
-        :root { --vermelho-spfc: #ff0000; --branco: #ffffff; --gramado-claro: #15803d; --gramado-escuro: #166534; }
+        :root { --vermelho-spfc: #ff0000; --branco: #ffffff; --preto: #000000; --gramado-claro: #15803d; --gramado-escuro: #166534; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
         
         #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
@@ -20,7 +20,6 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--vermelho-spfc); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR VERMELHO LISO */
         #placar { color: var(--vermelho-spfc); font-weight: bold; }
 
         .campo { 
@@ -28,13 +27,7 @@
             width: 350px; 
             height: 500px; 
             margin: 20px auto; 
-            background: repeating-linear-gradient(
-                to bottom,
-                var(--gramado-claro),
-                var(--gramado-claro) 50px,
-                var(--gramado-escuro) 50px,
-                var(--gramado-escuro) 100px
-            );
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
             border: 3px solid white; 
             border-radius: 10px;
             overflow: hidden;
@@ -49,14 +42,35 @@
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         
-        /* CAMISA VERMELHA LISA (NÃO MUDA DE COR) */
-        .camisa { width: 40px; height: 40px; background: var(--vermelho-spfc); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid white; position: relative; }
-        .camisa::after { content: "?"; color: rgba(255,255,255,0.7); font-weight: bold; font-size: 14px; }
+        /* CAMISA SÃO PAULO TRICOLOR */
+        .camisa { 
+            width: 40px; 
+            height: 40px; 
+            background: linear-gradient(
+                to bottom,
+                var(--branco) 0%, 
+                var(--branco) 40%, 
+                var(--vermelho-spfc) 40%, 
+                var(--vermelho-spfc) 50%, 
+                var(--preto) 50%, 
+                var(--preto) 60%, 
+                var(--branco) 60%, 
+                var(--branco) 100%
+            );
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            border: 1px solid #ccc; 
+            position: relative; 
+        }
+
+        .camisa::after { content: "?"; color: var(--preto); font-weight: bold; font-size: 14px; opacity: 0.5; }
         
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        /* ACERTO: CAMISA CONTINUA VERMELHA, SOME O "?" */
         .acertou .camisa::after { content: ""; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
@@ -103,16 +117,13 @@
         <div class="area-box area-fundo"></div>
 
         <div class="jogadora pos-gk" data-nome="Marcelle"></div>
-        
         <div class="jogadora pos-ld" data-nome="Ravena"></div>
         <div class="jogadora pos-z1" data-nome="Joyce"></div>
         <div class="jogadora pos-z2" data-nome="Giovanna"></div>
         <div class="jogadora pos-le" data-nome="Clara"></div>
-
         <div class="jogadora pos-m1" data-nome="Carol"></div>
         <div class="jogadora pos-m2" data-nome="Leticia Alves"></div>
         <div class="jogadora pos-m3" data-nome="Milena"></div>
-
         <div class="jogadora pos-a1" data-nome="Isa"></div>
         <div class="jogadora pos-a2" data-nome="Dudinha"></div>
         <div class="jogadora pos-a3" data-nome="Giovaninha"></div>
