@@ -8,23 +8,40 @@
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         header { background: #000; width: 100%; padding: 25px 0; border-bottom: 3px solid #fde047; margin-bottom: 30px; }
         h1 { margin: 0; font-size: 22px; text-transform: uppercase; color: #fde047; }
-        .container { width: 90%; max-width: 500px; flex: 1; }
-        .card-jogo { background: #222; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; transition: 0.3s; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; }
-        .card-jogo:hover { border-color: #fde047; transform: scale(1.02); }
-        .info-jogo h3 { margin: 0; font-size: 18px; }
+        .container { width: 90%; max-width: 500px; flex: 1; padding-bottom: 40px; }
+        
+        .card-jogo { 
+            background: #222; 
+            border-radius: 15px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            border: 1px solid #444; 
+            transition: 0.3s; 
+            text-decoration: none; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+        
+        .card-jogo:hover { border-color: #fde047; transform: scale(1.02); background: #2a2a2a; }
+        .info-jogo { text-align: left; }
+        .info-jogo h3 { margin: 0; font-size: 18px; color: #fde047; }
         .info-jogo p { margin: 5px 0 0 0; color: #bbb; font-size: 12px; }
+        
         .btn-jogar { background: #fde047; color: black; padding: 8px 15px; border-radius: 5px; font-weight: bold; font-size: 12px; }
-        .btn-voltar { margin-top: 20px; color: #fde047; text-decoration: none; font-size: 14px; font-weight: bold; padding-bottom: 30px; }
+        .btn-voltar { margin-top: 20px; color: #fde047; text-decoration: none; font-size: 14px; font-weight: bold; display: block; }
     </style>
 </head>
 <body>
     <header><h1>🌎 Seleções Nacionais</h1></header>
+    
     <div class="container">
         
         <a href="braxeua.html" class="card-jogo">
             <div class="info-jogo">
                 <h3>Brasil x EUA</h3>
-                <p>Copa do Mundo 2007</p>
+                <p>Copa do Mundo 2007 (4x0)</p>
             </div>
             <div class="btn-jogar">JOGAR</div>
         </a>
@@ -37,7 +54,23 @@
             <div class="btn-jogar">JOGAR</div>
         </a>
 
-        <a href="index.html" class="btn-voltar">← Voltar ao Menu</a>
+        <a href="braxjam.html" class="card-jogo">
+            <div class="info-jogo">
+                <h3>Brasil x Jamaica</h3>
+                <p>Copa do Mundo 2019 (Estreia)</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
+        <a href="braxind.html" class="card-jogo">
+            <div class="info-jogo">
+                <h3>Brasil x Índia</h3>
+                <p>Torneio de Manaus 2021</p>
+            </div>
+            <div class="btn-jogar">JOGAR</div>
+        </a>
+
+        <a href="index.html" class="btn-voltar">← Voltar ao Menu Início</a>
     </div>
 </body>
 </html>
