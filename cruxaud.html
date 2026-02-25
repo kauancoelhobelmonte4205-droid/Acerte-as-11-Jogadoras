@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing 11 - Cruzeiro x Audax</title>
+    <title>Missing 11 - Audax x Cruzeiro</title>
     <style>
         :root { --azul-cruzeiro: #005ba3; --azul-celeste: #87ceeb; --branco: #ffffff; --gramado-claro: #15803d; --gramado-escuro: #166534; }
         body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
@@ -60,11 +60,12 @@
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        .acertou .camisa::after { content: ""; }
+        /* MOSTRAR NÚMERO AO ACERTAR */
+        .acertou .camisa::after { content: attr(data-numero); color: white; font-size: 12px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Formação Cruzeiro */
+        /* Posicionamento */
         .pos-gk { bottom: 10px; left: 135px; } 
         .pos-ld { bottom: 85px; left: 10px; } .pos-z1 { bottom: 75px; left: 95px; } .pos-z2 { bottom: 75px; left: 175px; } .pos-le { bottom: 85px; left: 260px; }
         .pos-m1 { bottom: 180px; left: 30px; } .pos-m2 { bottom: 170px; left: 100px; } .pos-m3 { bottom: 170px; left: 170px; } .pos-m4 { bottom: 180px; left: 240px; }
@@ -77,7 +78,7 @@
         <div class="kick-off-box">
             <h2 style="color: var(--azul-celeste);">AUDAX x CRUZEIRO</h2>
             <p><b>Brasileirão Feminino A-1 - 15ª Rodada</b></p>
-            <p style="font-size: 13px; line-height: 1.6;">Audax 0 x 6 Cruzeiro<br>14/10/2020<br>Arena Barueri</p>
+            <p style="font-size: 13px; line-height: 1.6;">Audax 0 x 6 Cruzeiro<br>14/10/2020 - 19:30<br>Arena Barueri</p>
             <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
         </div>
     </div>
@@ -105,17 +106,17 @@
         <div class="area-box area-topo"></div>
         <div class="area-box area-fundo"></div>
 
-        <div class="jogadora pos-gk" data-nome="Mary Camilo"></div>
-        <div class="jogadora pos-ld" data-nome="Tata"></div>
-        <div class="jogadora pos-z1" data-nome="Thamirys"></div>
-        <div class="jogadora pos-z2" data-nome="Mariana Pires"></div>
-        <div class="jogadora pos-le" data-nome="Eskerdinha"></div>
-        <div class="jogadora pos-m1" data-nome="Janaina"></div>
-        <div class="jogadora pos-m2" data-nome="Duda Sampaio"></div>
-        <div class="jogadora pos-m3" data-nome="Patricia"></div>
-        <div class="jogadora pos-m4" data-nome="Andressa"></div>
-        <div class="jogadora pos-a1" data-nome="Miria"></div>
-        <div class="jogadora pos-a2" data-nome="Vanessinha"></div>
+        <div class="jogadora pos-gk" data-nome="Mary Camilo" data-num="12"></div>
+        <div class="jogadora pos-ld" data-nome="Tata" data-num="16"></div>
+        <div class="jogadora pos-z1" data-nome="Thamirys" data-num="21"></div>
+        <div class="jogadora pos-z2" data-nome="Mariana Pires" data-num="3"></div>
+        <div class="jogadora pos-le" data-nome="Eskerdinha" data-num="6"></div>
+        <div class="jogadora pos-m1" data-nome="Janaina" data-num="15"></div>
+        <div class="jogadora pos-m2" data-nome="Duda Sampaio" data-num="10"></div>
+        <div class="jogadora pos-m3" data-nome="Patricia" data-num="20"></div>
+        <div class="jogadora pos-m4" data-nome="Andressa" data-num="8"></div>
+        <div class="jogadora pos-a1" data-nome="Miria" data-num="22"></div>
+        <div class="jogadora pos-a2" data-nome="Vanessinha" data-num="7"></div>
     </div>
 
     <script>
@@ -126,7 +127,9 @@
 
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
-            j.innerHTML = `<div class="camisa"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+            const num = j.getAttribute('data-num');
+            // O segredo está em passar o data-numero para a div camisa
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
         input.addEventListener('input', () => {
