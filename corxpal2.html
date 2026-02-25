@@ -25,7 +25,6 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor-principal); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR NA COR PRETA */
         #placar { color: var(--preto); font-weight: bold; background: white; padding: 2px 8px; border-radius: 4px; }
 
         .campo { 
@@ -33,13 +32,7 @@
             width: 350px; 
             height: 500px; 
             margin: 20px auto; 
-            background: repeating-linear-gradient(
-                to bottom,
-                var(--gramado-claro),
-                var(--gramado-claro) 50px,
-                var(--gramado-escuro) 50px,
-                var(--gramado-escuro) 100px
-            );
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
             border: 3px solid white; 
             border-radius: 10px;
             overflow: hidden;
@@ -53,23 +46,28 @@
         .area-fundo { bottom: -2px; }
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
-        .camisa { width: 40px; height: 40px; background: #f0f0f0; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); }
-        .camisa::after { content: "?"; color: rgba(0,0,0,0.3); font-weight: bold; }
         
-        .dica { 
-            font-family: monospace; 
-            font-size: 13px; 
-            color: #bbb; 
-            margin-top: 5px; 
-            display: block;
-            line-height: 1.1;
-            word-spacing: 100vw;
+        /* Camisa Branca */
+        .camisa { 
+            width: 40px; height: 40px; 
+            background: #ffffff; 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            font-weight: bold;
+            color: transparent;
         }
 
+        .camisa::after { content: "?"; color: rgba(0,0,0,0.3); font-weight: bold; }
+        
+        .dica { font-family: monospace; font-size: 13px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        .acertou .camisa { background: #000; border: 1px solid white; }
-        .acertou .camisa::after { content: ""; }
+        /* Acerto: Mostra número em preto */
+        .acertou .camisa { border: 1px solid #000; }
+        .acertou .camisa::after { content: attr(data-numero); color: #000; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
@@ -112,17 +110,17 @@
         <div class="area-box area-topo"></div>
         <div class="area-box area-fundo"></div>
 
-        <div class="jogadora gol" data-nome="Lele"></div>
-        <div class="jogadora lat1" data-nome="Katiuscia"></div>
-        <div class="jogadora zag1" data-nome="Tarciane"></div>
-        <div class="jogadora zag2" data-nome="Mariza"></div>
-        <div class="jogadora lat2" data-nome="Tamires"></div>
-        <div class="jogadora meia1" data-nome="Luana"></div>
-        <div class="jogadora meia2" data-nome="Duda Sampaio"></div>
-        <div class="jogadora meia3" data-nome="Vic Albuquerque"></div>
-        <div class="jogadora meia4" data-nome="Gabi Zanotti"></div>
-        <div class="jogadora ata1" data-nome="Gabi Portilho"></div>
-        <div class="jogadora ata2" data-nome="Millene"></div>
+        <div class="jogadora gol" data-nome="Lele" data-num="12"></div>
+        <div class="jogadora lat1" data-nome="Katiuscia" data-num="2"></div>
+        <div class="jogadora zag1" data-nome="Tarciane" data-num="3"></div>
+        <div class="jogadora zag2" data-nome="Mariza" data-num="20"></div>
+        <div class="jogadora lat2" data-nome="Tamires" data-num="37"></div>
+        <div class="jogadora meia1" data-nome="Luana" data-num="5"></div>
+        <div class="jogadora meia2" data-nome="Duda Sampaio" data-num="10"></div>
+        <div class="jogadora meia3" data-nome="Vic Albuquerque" data-num="17"></div>
+        <div class="jogadora meia4" data-nome="Gabi Zanotti" data-num="10"></div>
+        <div class="jogadora ata1" data-nome="Gabi Portilho" data-num="18"></div>
+        <div class="jogadora ata2" data-nome="Millene" data-num="14"></div>
     </div>
 
     <script>
@@ -133,7 +131,8 @@
 
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
-            j.innerHTML = `<div class="camisa"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
         input.addEventListener('input', () => {
