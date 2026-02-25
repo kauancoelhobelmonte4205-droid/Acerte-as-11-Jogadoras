@@ -23,51 +23,27 @@
         .placar-texto { margin: 10px 0 0 0; font-size: 14px; color: #bbb; }
         #placar { color: var(--cor-tema); font-weight: bold; font-size: 20px; }
 
-        /* CAMPO COM LISTRAS E MARCAÇÕES */
         .campo { 
             position: relative; 
             width: 350px; 
             height: 520px; 
             margin: 20px auto; 
-            background: repeating-linear-gradient(
-                to bottom,
-                var(--gramado-claro),
-                var(--gramado-claro) 52px,
-                var(--gramado-escuro) 52px,
-                var(--gramado-escuro) 104px
-            );
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 52px, var(--gramado-escuro) 52px, var(--gramado-escuro) 104px);
             border: 3px solid white; 
             border-radius: 10px; 
             overflow: hidden;
         }
 
-        .campo::before {
-            content: "";
-            position: absolute;
-            top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4);
-        }
-        .campo::after {
-            content: "";
-            position: absolute;
-            top: 50%; left: 50%; width: 80px; height: 80px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
 
-        .area-box {
-            position: absolute;
-            left: 50%; transform: translateX(-50%);
-            border: 2px solid rgba(255,255,255,0.4);
-            width: 180px; height: 70px;
-        }
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
         .area-topo { top: -2px; }
         .area-fundo { bottom: -2px; }
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         .camisa { width: 40px; height: 40px; background: #fbbf24; margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid #000; position: relative; }
         
-        /* Número oculto por padrão */
         .camisa::after { content: "?"; color: rgba(0,0,0,0.5); font-weight: bold; }
         
         .dica { font-family: monospace; font-size: 13px; color: var(--branco); margin-top: 5px; letter-spacing: 1px; }
@@ -78,7 +54,6 @@
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posições */
         .pos1 { bottom: 15px; left: 135px; }
         .pos4 { bottom: 90px; left: 35px; } .pos5 { bottom: 85px; left: 135px; } .pos3 { bottom: 90px; left: 235px; }
         .pos9 { bottom: 200px; left: 10px; } .pos7 { bottom: 190px; left: 135px; } .pos2 { bottom: 200px; left: 260px; }
@@ -100,14 +75,14 @@
         <div class="kick-off-box">
             <h2 style="color: var(--verde-br);">VITÓRIA HISTÓRICA!</h2>
             <p>Você escalou a seleção que encantou o mundo em 2007!</p>
-            <a href="selecoes.html" class="btn-proximo">PRÓXIMO DESAFIO</a>
+            <a href="dinxbra.html" class="btn-proximo">PRÓXIMO DESAFIO</a>
         </div>
     </div>
 
     <div class="nav-fases">
         <a href="selecoes.html" class="btn-nav">🏠 Menu</a>
         <span>Copa do Mundo 2007</span>
-        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+        <a href="dinxbra.html" class="btn-nav">Próximo ➡</a>
     </div>
 
     <div class="painel">
