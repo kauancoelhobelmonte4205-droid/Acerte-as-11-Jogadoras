@@ -60,12 +60,10 @@
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        /* MOSTRAR NÚMERO AO ACERTAR */
         .acertou .camisa::after { content: attr(data-numero); color: white; font-size: 12px; }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Posicionamento */
         .pos-gk { bottom: 10px; left: 135px; } 
         .pos-ld { bottom: 85px; left: 10px; } .pos-z1 { bottom: 75px; left: 95px; } .pos-z2 { bottom: 75px; left: 175px; } .pos-le { bottom: 85px; left: 260px; }
         .pos-m1 { bottom: 180px; left: 30px; } .pos-m2 { bottom: 170px; left: 100px; } .pos-m3 { bottom: 170px; left: 170px; } .pos-m4 { bottom: 180px; left: 240px; }
@@ -94,7 +92,7 @@
     <div class="nav-fases">
         <a href="saoxcor.html" class="btn-nav">⬅ Jogo Anterior</a>
         <span>Brasileirão A-1 2020</span>
-        <a href="ferxpal.html" class="btn-nav">Próximo ➡</a>
+        <a href="grexint.html" class="btn-nav">Próximo ➡</a>
     </div>
 
     <div class="painel">
@@ -128,7 +126,6 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
-            // O segredo está em passar o data-numero para a div camisa
             j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Z]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
         });
 
