@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - Dinamarca x Brasil</title>
+    <style>
+        :root { 
+            --amarelo: #fde047; 
+            --verde: #15803d;
+            --azul: #1d4ed8;
+            --gramado-claro: #15803d; 
+            --gramado-escuro: #166534; 
+        }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
+        .kick-off-box { background: #222; padding: 30px; border-radius: 15px; border: 2px solid var(--amarelo); width: 80%; max-width: 400px; }
+        .btn-play, .btn-proximo { background: var(--amarelo); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px; text-decoration: none; display: inline-block; }
+        
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--verde); position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        #placar { color: var(--amarelo); font-weight: bold; background: var(--verde); padding: 2px 8px; border-radius: 4px; }
+
+        .campo { 
+            position: relative; 
+            width: 350px; 
+            height: 500px; 
+            margin: 20px auto; 
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
+            border: 3px solid white; 
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
+
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
+        .area-topo { top: -2px; }
+        .area-fundo { bottom: -2px; }
+
+        .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
+        
+        .camisa { 
+            width: 40px; height: 40px; 
+            background: #444; /* Cor neutra antes de acertar */
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            font-weight: bold;
+            color: transparent;
+        }
+
+        .camisa::after { content: "?"; color: rgba(255,255,255,0.5); font-weight: bold; }
+        
+        .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
+        .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
+        
+        /* Acerto: Revela a Amarelinha */
+        .acertou .camisa { background: var(--amarelo); border: 1px solid var(--verde); }
+        .acertou .camisa::after { content: attr(data-numero); color: var(--verde); }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Posicionamento 4-4-2 */
+        .pos-gk { bottom: 10px; left: 135px; } 
+        .pos-ld { bottom: 90px; left: 5px; } .pos-z1 { bottom: 80px; left: 90px; } .pos-z2 { bottom: 80px; left: 180px; } .pos-le { bottom: 90px; left: 265px; }
+        .pos-m1 { bottom: 185px; left: 15px; } .pos-m2 { bottom: 175px; left: 100px; } .pos-m3 { bottom: 175px; left: 180px; } .pos-m4 { bottom: 185px; left: 265px; }
+        .pos-a1 { top: 75px; left: 85px; } .pos-a2 { top: 75px; left: 195px; }
+    </style>
+</head>
+<body>
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--amarelo);">BRASIL</h2>
+            <p><b>Amistoso Internacional</b></p>
+            <p style="font-size: 14px; line-height: 1.6;">Dinamarca 2 x 1 Brasil<br>24/06/2022 - 14:00<br>Estádio Parken (Copenhague)</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--amarelo);">SELEÇÃO ESCALADA!</h2>
+            <p>Você conhece as Guerreiras do Brasil!</p>
+            <a href="index.html" class="btn-proximo">VOLTAR AO MENU</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="sanxuni.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <span>Seleção Brasileira</span>
+        <a href="#" class="btn-nav">Próximo Jogo ➡</a>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Digite o nome da jogadora..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="area-box area-topo"></div>
+        <div class="area-box area-fundo"></div>
+
+        <div class="jogadora pos-gk" data-nome="Lorena" data-num="1"></div>
+        <div class="jogadora pos-ld" data-nome="Fe Palermo" data-num="20"></div>
+        <div class="jogadora pos-z1" data-nome="Tainara" data-num="15"></div>
+        <div class="jogadora pos-z2" data-nome="Rafaelle" data-num="4"></div>
+        <div class="jogadora pos-le" data-nome="Leticia Santos" data-num="2"></div>
+        
+        <div class="jogadora pos-m1" data-nome="Duda Santos" data-num="5"></div>
+        <div class="jogadora pos-m2" data-nome="Luana" data-num="23"></div>
+        <div class="jogadora pos-m3" data-nome="Kerolin" data-num="21"></div>
+        <div class="jogadora pos-m4" data-nome="Adriana" data-num="11"></div>
+        
+        <div class="jogadora pos-a1" data-nome="Bia Zaneratto" data-num="16"></div>
+        <div class="jogadora pos-a2" data-nome="Debinha" data-num="9"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
+        let acertos = 0;
+
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+        });
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
+                // Aceitar "Fernanda Palermo" para "Fe Palermo" ou "Leticia" para "Leticia Santos" se desejar, 
+                // mas mantive o nome exato conforme solicitado.
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    if (acertos === 11) { setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
