@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - São José x Corinthians</title>
+    <style>
+        :root { --cor-timao: #000000; --fundo-card: #ffffff; --gramado-claro: #15803d; --gramado-escuro: #166534; --branco: #ffffff; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
+        .kick-off-box { background: #222; padding: 30px; border-radius: 20px; border: 1px solid #333; width: 80%; max-width: 400px; }
+        .btn-play, .btn-proximo { background: var(--branco); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--cor-timao); position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        #placar { color: var(--branco); font-weight: bold; }
+
+        .campo { 
+            position: relative; 
+            width: 350px; 
+            height: 500px; 
+            margin: 20px auto; 
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
+            border: 3px solid white; 
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
+
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
+        .area-topo { top: -2px; }
+        .area-fundo { bottom: -2px; }
+
+        .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
+        
+        .camisa { 
+            width: 38px; height: 38px; background: var(--branco); 
+            margin: 0 auto; display: flex; align-items: center; justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            border: 1px solid var(--cor-timao); position: relative; 
+        }
+
+        .camisa::after { content: "?"; color: #000; font-weight: bold; font-size: 14px; }
+        
+        .dica { font-family: monospace; font-size: 10px; color: #ddd; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
+        .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
+        
+        .acertou .camisa::after { content: attr(data-numero); font-size: 11px; }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Posicionamento 5-3-2 */
+        .pos-gk { bottom: 10px; left: 135px; } 
+        .pos-ld { bottom: 95px; left: 5px; } 
+        .pos-z1 { bottom: 75px; left: 75px; } 
+        .pos-z2 { bottom: 70px; left: 135px; } 
+        .pos-z3 { bottom: 75px; left: 195px; } 
+        .pos-le { bottom: 95px; left: 265px; }
+        
+        .pos-m1 { bottom: 175px; left: 55px; } 
+        .pos-m2 { bottom: 165px; left: 135px; } 
+        .pos-m3 { bottom: 175px; left: 215px; }
+        
+        .pos-a1 { top: 95px; left: 85px; } 
+        .pos-a2 { top: 95px; left: 185px; }
+    </style>
+</head>
+<body>
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--branco);">SÃO JOSÉ x CORINTHIANS</h2>
+            <p><b>Brasileirão Feminino A-1 2021 - 7ª Rodada</b></p>
+            <p style="font-size: 13px; line-height: 1.6;">São José 2 x 8 Corinthians<br>13/05/2021 - 20:00<br>Martins Pereira</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--branco);">GOLEADA HISTÓRICA!</h2>
+            <p>As Brabas deram um show em São José dos Campos!</p>
+            <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="grexint.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <span>Brasileirão A-1 2021</span>
+        <a href="ferxpal.html" class="btn-nav">Próximo ➡</a>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Nome da jogadora..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="area-box area-topo"></div>
+        <div class="area-box area-fundo"></div>
+
+        <div class="jogadora pos-gk" data-nome="Kemelli" data-num="12"></div>
+        <div class="jogadora pos-ld" data-nome="Katiuscia" data-num="2"></div>
+        <div class="jogadora pos-z1" data-nome="Pardal" data-num="3"></div>
+        <div class="jogadora pos-z2" data-nome="Erika" data-num="99"></div>
+        <div class="jogadora pos-z3" data-nome="Yasmin" data-num="71"></div>
+        <div class="jogadora pos-le" data-nome="Juliete" data-num="6"></div>
+        
+        <div class="jogadora pos-m1" data-nome="Grazi" data-num="7"></div>
+        <div class="jogadora pos-m2" data-nome="Gabi Zanotti" data-num="10"></div>
+        <div class="jogadora pos-m3" data-nome="Vic Albuquerque" data-num="17"></div>
+        
+        <div class="jogadora pos-a1" data-nome="Gabi Nunes" data-num="11"></div>
+        <div class="jogadora pos-a2" data-nome="Giovanna Crivelari" data-num="19"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
+        let acertos = 0;
+
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+        });
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    if (acertos === 11) { setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
