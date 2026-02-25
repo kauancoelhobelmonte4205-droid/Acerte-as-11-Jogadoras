@@ -50,7 +50,7 @@
         
         .camisa { 
             width: 40px; height: 40px; 
-            background: #444; 
+            background: rgba(253, 224, 71, 0.4); /* Amarelo clarinho/transparente antes de acertar */
             margin: 0 auto; 
             display: flex; 
             align-items: center; 
@@ -58,14 +58,17 @@
             clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
             font-weight: bold;
             color: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
         }
 
-        .camisa::after { content: "?"; color: rgba(255,255,255,0.5); font-weight: bold; }
+        .camisa::after { content: "?"; color: rgba(0,0,0,0.3); font-weight: bold; }
         
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        .acertou .camisa { background: var(--amarelo); border: 1px solid var(--verde); }
+        /* Acerto: Revela a Amarelinha Vibrante */
+        .acertou .camisa { background: var(--amarelo); border: 1.5px solid var(--verde); box-shadow: 0 0 10px rgba(0,0,0,0.3); }
         .acertou .camisa::after { content: attr(data-numero); color: var(--verde); }
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
