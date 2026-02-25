@@ -50,7 +50,7 @@
         
         .camisa { 
             width: 40px; height: 40px; 
-            background: #444; /* Cor neutra antes de acertar */
+            background: #444; 
             margin: 0 auto; 
             display: flex; 
             align-items: center; 
@@ -65,7 +65,6 @@
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
         
-        /* Acerto: Revela a Amarelinha */
         .acertou .camisa { background: var(--amarelo); border: 1px solid var(--verde); }
         .acertou .camisa::after { content: attr(data-numero); color: var(--verde); }
         .acertou .dica { display: none; }
@@ -93,14 +92,14 @@
         <div class="kick-off-box">
             <h2 style="color: var(--amarelo);">SELEÇÃO ESCALADA!</h2>
             <p>Você conhece as Guerreiras do Brasil!</p>
-            <a href="index.html" class="btn-proximo">VOLTAR AO MENU</a>
+            <a href="braxjam.html" class="btn-proximo">PRÓXIMO JOGO</a>
         </div>
     </div>
 
     <div class="nav-fases">
-        <a href="sanxuni.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <a href="braxeua.html" class="btn-nav">⬅ Jogo Anterior</a>
         <span>Seleção Brasileira</span>
-        <a href="#" class="btn-nav">Próximo Jogo ➡</a>
+        <a href="braxjam.html" class="btn-nav">Próximo Jogo ➡</a>
     </div>
 
     <div class="painel">
@@ -143,9 +142,6 @@
             const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
             lista.forEach(j => {
                 const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                
-                // Aceitar "Fernanda Palermo" para "Fe Palermo" ou "Leticia" para "Leticia Santos" se desejar, 
-                // mas mantive o nome exato conforme solicitado.
                 if (digitado === correto && !j.classList.contains('acertou')) {
                     j.classList.add('acertou');
                     acertos++;
