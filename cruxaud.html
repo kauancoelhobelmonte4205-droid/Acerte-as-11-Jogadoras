@@ -20,7 +20,6 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--azul-celeste); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR AZUL CELESTE */
         #placar { color: var(--azul-celeste); font-weight: bold; }
 
         .campo { 
@@ -43,8 +42,19 @@
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         
-        /* CAMISA AZUL DO CRUZEIRO */
-        .camisa { width: 40px; height: 40px; background: var(--azul-cruzeiro); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid var(--branco); position: relative; }
+        .camisa { 
+            width: 40px; 
+            height: 40px; 
+            background: var(--azul-cruzeiro); 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            border: 1px solid var(--branco); 
+            position: relative; 
+        }
+
         .camisa::after { content: "?"; color: rgba(255,255,255,0.7); font-weight: bold; font-size: 14px; }
         
         .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
@@ -54,7 +64,7 @@
         .acertou .dica { display: none; }
         .acertou .nome-revelado { display: block; }
 
-        /* Formação 4-4-2 ou 4-3-3 adaptada para as posições */
+        /* Formação Cruzeiro */
         .pos-gk { bottom: 10px; left: 135px; } 
         .pos-ld { bottom: 85px; left: 10px; } .pos-z1 { bottom: 75px; left: 95px; } .pos-z2 { bottom: 75px; left: 175px; } .pos-le { bottom: 85px; left: 260px; }
         .pos-m1 { bottom: 180px; left: 30px; } .pos-m2 { bottom: 170px; left: 100px; } .pos-m3 { bottom: 170px; left: 170px; } .pos-m4 { bottom: 180px; left: 240px; }
@@ -76,14 +86,14 @@
         <div class="kick-off-box">
             <h2 style="color: var(--azul-celeste);">GOLEADA!</h2>
             <p>Show das Cabulosas! Você escalou o time que atropelou em Barueri.</p>
-            <a href="menu_base.html" class="btn-proximo">VOLTAR AO MENU</a>
+            <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
         </div>
     </div>
 
     <div class="nav-fases">
-        <a href="saoxint_sub20.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <a href="saoxcor.html" class="btn-nav">⬅ Jogo Anterior</a>
         <span>Brasileirão A-1 2020</span>
-        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+        <a href="ferxpal.html" class="btn-nav">Próximo ➡</a>
     </div>
 
     <div class="painel">
@@ -100,12 +110,10 @@
         <div class="jogadora pos-z1" data-nome="Thamirys"></div>
         <div class="jogadora pos-z2" data-nome="Mariana Pires"></div>
         <div class="jogadora pos-le" data-nome="Eskerdinha"></div>
-
         <div class="jogadora pos-m1" data-nome="Janaina"></div>
         <div class="jogadora pos-m2" data-nome="Duda Sampaio"></div>
         <div class="jogadora pos-m3" data-nome="Patricia"></div>
         <div class="jogadora pos-m4" data-nome="Andressa"></div>
-
         <div class="jogadora pos-a1" data-nome="Miria"></div>
         <div class="jogadora pos-a2" data-nome="Vanessinha"></div>
     </div>
