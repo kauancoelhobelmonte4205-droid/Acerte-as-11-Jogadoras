@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing 11 - Grêmio x Inter</title>
+    <style>
+        :root { --azul-gremio: #00adef; --preto: #000000; --branco: #ffffff; --gramado-claro: #15803d; --gramado-escuro: #166534; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        
+        #modal-inicio, #modal-vitoria { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #modal-vitoria { display: none; }
+
+        .kick-off-box { background: #222; padding: 30px; border-radius: 20px; border: 1px solid #333; width: 80%; max-width: 400px; }
+        .btn-play, .btn-proximo { background: var(--branco); color: black; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        
+        .nav-fases { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 10px 20px; }
+        .btn-nav { background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 5px; text-decoration: none; font-size: 12px; }
+        
+        .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--azul-gremio); position: sticky; top: 0; z-index: 10; }
+        input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
+        
+        #placar { color: var(--azul-gremio); font-weight: bold; }
+
+        .campo { 
+            position: relative; 
+            width: 350px; 
+            height: 500px; 
+            margin: 20px auto; 
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
+            border: 3px solid white; 
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
+        .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
+
+        .area-box { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.4); width: 180px; height: 70px; }
+        .area-topo { top: -2px; }
+        .area-fundo { bottom: -2px; }
+
+        .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
+        
+        /* CAMISA TRICOLOR */
+        .camisa { 
+            width: 40px; 
+            height: 40px; 
+            background: linear-gradient(90deg, var(--azul-gremio) 33%, var(--branco) 33%, var(--branco) 66%, var(--preto) 66%);
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); 
+            border: 1px solid #ccc; 
+            position: relative; 
+        }
+
+        .camisa::after { content: "?"; color: #000; font-weight: bold; font-size: 14px; background: rgba(255,255,255,0.8); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        
+        .dica { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
+        .nome-revelado { font-size: 10px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; }
+        
+        .acertou .camisa::after { content: attr(data-numero); color: white; background: var(--preto); font-size: 11px; }
+        .acertou .dica { display: none; }
+        .acertou .nome-revelado { display: block; }
+
+        /* Formação 4-3-3 */
+        .pos-gk { bottom: 10px; left: 135px; } 
+        .pos-ld { bottom: 85px; left: 10px; } .pos-z1 { bottom: 75px; left: 95px; } .pos-z2 { bottom: 75px; left: 175px; } .pos-le { bottom: 85px; left: 260px; }
+        .pos-m1 { bottom: 180px; left: 50px; } .pos-m2 { bottom: 170px; left: 135px; } .pos-m3 { bottom: 180px; left: 220px; }
+        .pos-a1 { top: 90px; left: 30px; } .pos-a2 { top: 75px; left: 135px; } .pos-a3 { top: 90px; left: 240px; }
+    </style>
+</head>
+<body>
+
+    <div id="modal-inicio">
+        <div class="kick-off-box">
+            <h2 style="color: var(--azul-gremio);">GRÊMIO x INTER</h2>
+            <p><b>Gauchão Feminino 2022 - FINAL</b></p>
+            <p style="font-size: 13px; line-height: 1.6;">Grêmio 4 x 1 Internacional<br>06/11/2022 - Arena do Grêmio</p>
+            <button class="btn-play" onclick="document.getElementById('modal-inicio').style.display='none';document.getElementById('busca').disabled=false;document.getElementById('busca').focus();">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="modal-vitoria">
+        <div class="kick-off-box">
+            <h2 style="color: var(--azul-gremio);">CAMPEÃS!</h2>
+            <p>O Rio Grande é Azul! Você escalou as Gurias Gremistas campeãs de 2022.</p>
+            <a href="times_br.html" class="btn-proximo">VOLTAR AO MENU</a>
+        </div>
+    </div>
+
+    <div class="nav-fases">
+        <a href="cruxaud.html" class="btn-nav">⬅ Jogo Anterior</a>
+        <span>Final Gauchão 2022</span>
+        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+    </div>
+
+    <div class="painel">
+        <input type="text" id="busca" placeholder="Nome da jogadora..." disabled>
+        <p>Acertos: <span id="placar">0</span>/11</p>
+    </div>
+
+    <div class="campo">
+        <div class="area-box area-topo"></div>
+        <div class="area-box area-fundo"></div>
+
+        <div class="jogadora pos-gk" data-nome="Lorena" data-num="23"></div>
+        <div class="jogadora pos-ld" data-nome="Sinara" data-num="22"></div>
+        <div class="jogadora pos-z1" data-nome="Tuani" data-num="3"></div>
+        <div class="jogadora pos-z2" data-nome="Pati Maldaner" data-num="4"></div>
+        <div class="jogadora pos-le" data-nome="Jessica Soares" data-num="6"></div>
+        
+        <div class="jogadora pos-m1" data-nome="Karla Alves" data-num="8"></div>
+        <div class="jogadora pos-m2" data-nome="Jessica Pena" data-num="14"></div>
+        <div class="jogadora pos-m3" data-nome="Rafa Levis" data-num="10"></div>
+        
+        <div class="jogadora pos-a1" data-nome="Luany" data-num="18"></div>
+        <div class="jogadora pos-a2" data-nome="Cassia" data-num="28"></div>
+        <div class="jogadora pos-a3" data-nome="Lais Estevam" data-num="9"></div>
+    </div>
+
+    <script>
+        const input = document.getElementById('busca');
+        const lista = document.querySelectorAll('.jogadora');
+        const modalVitoria = document.getElementById('modal-vitoria');
+        let acertos = 0;
+
+        lista.forEach(j => {
+            const nome = j.getAttribute('data-nome');
+            const num = j.getAttribute('data-num');
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome.toUpperCase()}</div>`;
+        });
+
+        input.addEventListener('input', () => {
+            const digitado = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            lista.forEach(j => {
+                const correto = j.getAttribute('data-nome').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                if (digitado === correto && !j.classList.contains('acertou')) {
+                    j.classList.add('acertou');
+                    acertos++;
+                    document.getElementById('placar').innerText = acertos;
+                    input.value = '';
+                    if (acertos === 11) { setTimeout(() => { modalVitoria.style.display = 'flex'; }, 500); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
