@@ -20,28 +20,19 @@
         .painel { background: #222; padding: 15px; border-bottom: 3px solid var(--spfc-vermelho); position: sticky; top: 0; z-index: 10; }
         input { padding: 12px; width: 85%; border-radius: 25px; border: none; font-size: 16px; text-align: center; outline: none; }
         
-        /* PLACAR BRANCO */
         #placar { color: var(--branco); font-weight: bold; }
 
-        /* GRAMADO COM EFEITO DE CORTE */
         .campo { 
             position: relative; 
             width: 350px; 
             height: 500px; 
             margin: 20px auto; 
-            background: repeating-linear-gradient(
-                to bottom,
-                var(--gramado-claro),
-                var(--gramado-claro) 50px,
-                var(--gramado-escuro) 50px,
-                var(--gramado-escuro) 100px
-            );
+            background: repeating-linear-gradient(to bottom, var(--gramado-claro), var(--gramado-claro) 50px, var(--gramado-escuro) 50px, var(--gramado-escuro) 100px);
             border: 3px solid white; 
             border-radius: 10px;
             overflow: hidden;
         }
 
-        /* Marcações do Campo */
         .campo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.4); }
         .campo::after { content: ""; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; transform: translate(-50%, -50%); }
 
@@ -51,22 +42,11 @@
 
         .jogadora { position: absolute; width: 80px; text-align: center; z-index: 5; }
         
-        /* Camisa SPFC */
         .camisa { width: 38px; height: 38px; background: var(--branco); margin: 0 auto; display: flex; align-items: center; justify-content: center; clip-path: polygon(25% 0%, 75% 0%, 100% 20%, 85% 35%, 75% 25%, 75% 100%, 25% 100%, 25% 25%, 15% 35%, 0% 20%); border: 1px solid var(--spfc-preto); position: relative; }
         .camisa::before { content: ""; position: absolute; top: 40%; width: 100%; height: 3px; background: linear-gradient(to bottom, var(--spfc-vermelho) 50%, var(--spfc-preto) 50%); }
         .camisa::after { content: "?"; color: var(--spfc-preto); font-weight: bold; font-size: 16px; z-index: 2; }
         
-        /* Dica com quebra de linha */
-        .dica { 
-            font-family: monospace; 
-            font-size: 10px; 
-            color: var(--branco); 
-            margin-top: 5px; 
-            display: block; 
-            line-height: 1.1;
-            word-spacing: 100vw; 
-        }
-
+        .dica { font-family: monospace; font-size: 10px; color: var(--branco); margin-top: 5px; display: block; line-height: 1.1; word-spacing: 100vw; }
         .nome-revelado { font-size: 9px; font-weight: bold; display: none; margin-top: 5px; background: white; color: black; padding: 2px; border-radius: 3px; text-transform: uppercase; }
         
         .acertou .camisa::after { content: attr(data-numero); font-size: 11px; }
@@ -109,7 +89,7 @@
     <div class="nav-fases">
         <a href="times_br.html" class="btn-nav">🏠 Menu Brasil</a>
         <span>Supercopa 2025</span>
-        <button class="btn-nav" style="opacity: 0.3;">Próximo ➡</button>
+        <a href="cruxaud.html" class="btn-nav">Próximo ➡</a>
     </div>
 
     <div class="painel">
@@ -143,9 +123,7 @@
         lista.forEach(j => {
             const nome = j.getAttribute('data-nome');
             const num = j.getAttribute('data-num');
-            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelated">${nome}</div>`;
-            // Pequeno ajuste: adicionei a classe correta para revelação
-            j.querySelector('.nome-revelated').className = 'nome-revelado';
+            j.innerHTML = `<div class="camisa" data-numero="${num}"></div><div class="dica">${nome.replace(/[a-zA-Záàâãéèêíïóôõöúç]/g, '*')}</div><div class="nome-revelado">${nome}</div>`;
         });
 
         input.addEventListener('input', () => {
